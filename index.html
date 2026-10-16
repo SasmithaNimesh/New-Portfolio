@@ -45,6 +45,10 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="nav-terminal-trigger" id="nav-terminal-btn" aria-label="Open Interactive AI Console" title="Press ` or Ctrl+K to open AI Terminal">
+          <span>&gt;_</span> Console
+        </button>
+
         <a href="#contact" class="nav-contact-btn link-draw">
           Get in Touch &rarr;
         </a>
@@ -499,6 +503,68 @@
       <div class="casestudy-links-row" id="modal-links">
         <!-- Injected via JavaScript -->
       </div>
+    </div>
+  </div>
+
+  <!-- Floating Interactive AI & Dev Terminal Launcher -->
+  <aside class="terminal-launcher-wrap" aria-label="Terminal Console Launcher">
+    <button class="terminal-launcher-btn" id="terminal-launcher-btn" aria-haspopup="dialog" aria-expanded="false" title="Open AI Terminal (Shortcut: ` or Ctrl+K)">
+      <span class="terminal-launcher-pulse" aria-hidden="true"></span>
+      <span class="terminal-launcher-icon" aria-hidden="true">&gt;_</span>
+      <span class="terminal-launcher-label">AI Console</span>
+      <span class="terminal-launcher-kbd" aria-hidden="true">`</span>
+    </button>
+  </aside>
+
+  <!-- Interactive AI Developer Terminal Modal -->
+  <div class="ai-terminal-backdrop" id="ai-terminal-modal" role="dialog" aria-modal="true" aria-labelledby="terminal-title" aria-hidden="true">
+    <div class="ai-terminal-window">
+      <!-- Terminal Header -->
+      <div class="terminal-header">
+        <div class="terminal-controls">
+          <button class="term-btn term-close" id="term-close-btn" aria-label="Close Terminal" title="Close (Esc)"></button>
+          <button class="term-btn term-minimize" id="term-min-btn" aria-label="Minimize Terminal" title="Minimize"></button>
+          <button class="term-btn term-maximize" id="term-max-btn" aria-label="Maximize Terminal" title="Toggle Fullscreen"></button>
+        </div>
+        <div class="terminal-title" id="terminal-title">
+          <span class="term-title-icon">⚡</span>
+          <span>sasmitha@neural-core:~$ (Interactive AI Console)</span>
+        </div>
+        <div class="terminal-badge">
+          <span class="term-status-dot"></span>
+          <span>v2.5 • ONLINE</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Chips for Fast Command Insertion -->
+      <div class="terminal-quick-chips" aria-label="Quick Commands">
+        <span class="quick-chip-label">Quick:</span>
+        <button class="term-chip" data-cmd="help">help</button>
+        <button class="term-chip" data-cmd="about">about</button>
+        <button class="term-chip" data-cmd="skills">skills</button>
+        <button class="term-chip" data-cmd="projects">projects</button>
+        <button class="term-chip" data-cmd="contact">contact</button>
+        <button class="term-chip" data-cmd="blast">blast</button>
+        <button class="term-chip" data-cmd="matrix">matrix</button>
+        <button class="term-chip" data-cmd="hire">hire</button>
+        <button class="term-chip" data-cmd="clear">clear</button>
+      </div>
+
+      <!-- Terminal Output Scroll Area -->
+      <div class="terminal-body" id="terminal-output" tabindex="0" role="log" aria-live="polite">
+        <!-- Welcoming banner rendered via JS -->
+      </div>
+
+      <!-- Command Input Prompt -->
+      <form class="terminal-input-bar" id="terminal-form" autocomplete="off">
+        <label for="terminal-input" class="term-prompt">
+          <span class="prompt-user">guest</span><span class="prompt-at">@</span><span class="prompt-host">sasmitha.ai</span><span class="prompt-path">:~$</span>
+        </label>
+        <div class="term-input-wrapper">
+          <input type="text" id="terminal-input" class="term-input" placeholder="Type a command or ask a question (e.g. 'skills', 'about')..." autocomplete="off" spellcheck="false" />
+        </div>
+        <button type="submit" class="term-send-btn" aria-label="Run Command">Run ↵</button>
+      </form>
     </div>
   </div>
 

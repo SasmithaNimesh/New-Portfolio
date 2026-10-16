@@ -1382,3 +1382,509 @@ a {
     border-color: #38bdf8;
   }
 }
+
+/* ==========================================================================
+   Interactive AI & Developer Console Terminal Styles
+   ========================================================================== */
+
+/* Nav Console Trigger Button */
+.nav-terminal-trigger {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  font-family: var(--font-heading), monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-terminal-trigger:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Floating Terminal Launcher Pill */
+.terminal-launcher-wrap {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 998;
+}
+
+.terminal-launcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(8, 18, 40, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #f0f5ff;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.22);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-heading), monospace;
+}
+
+.terminal-launcher-btn:hover {
+  background: rgba(13, 27, 58, 0.95);
+  border-color: #64ffda;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 28px rgba(100, 255, 218, 0.35);
+}
+
+.terminal-launcher-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #64ffda;
+  box-shadow: 0 0 10px #64ffda;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.terminal-launcher-icon {
+  color: #38bdf8;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.terminal-launcher-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.terminal-launcher-kbd {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Modal Backdrop */
+.ai-terminal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 6, 13, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-terminal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Terminal Window Container */
+.ai-terminal-window {
+  width: 100%;
+  max-width: 860px;
+  height: 580px;
+  max-height: 88vh;
+  background: rgba(6, 12, 26, 0.96);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(56, 189, 248, 0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95) translateY(15px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), max-width 0.3s ease, height 0.3s ease;
+  font-family: 'Space Grotesk', 'Courier New', Courier, monospace;
+}
+
+.ai-terminal-backdrop.active .ai-terminal-window {
+  transform: scale(1) translateY(0);
+}
+
+.ai-terminal-window.is-maximized {
+  max-width: 96vw;
+  height: 92vh;
+  max-height: 92vh;
+}
+
+/* Terminal Header */
+.terminal-header {
+  height: 44px;
+  min-height: 44px;
+  background: rgba(13, 27, 58, 0.65);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  user-select: none;
+}
+
+.terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.term-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.term-btn:hover {
+  transform: scale(1.15);
+}
+
+.term-close {
+  background: #ff5f56;
+}
+
+.term-minimize {
+  background: #ffbd2e;
+}
+
+.term-maximize {
+  background: #27c93f;
+}
+
+.terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.term-title-icon {
+  color: #38bdf8;
+  font-size: 0.9rem;
+}
+
+.terminal-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #64ffda;
+  background: rgba(100, 255, 218, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.term-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64ffda;
+  box-shadow: 0 0 6px #64ffda;
+}
+
+/* Quick Chips Toolbar */
+.terminal-quick-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: rgba(3, 8, 20, 0.55);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.terminal-quick-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-chip-label {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  margin-right: 0.2rem;
+  text-transform: uppercase;
+}
+
+.term-chip {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #8ea3cc;
+  font-family: inherit;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.term-chip:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+/* Terminal Output Scroll Area */
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.25) transparent;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 3px;
+}
+
+/* Output Typography & Syntax Elements */
+.term-line {
+  margin-bottom: 0.45rem;
+  word-break: break-word;
+}
+
+.term-banner-ascii {
+  color: #38bdf8;
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 0.75rem;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  white-space: pre;
+}
+
+.term-tag-cyan {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.term-tag-emerald {
+  color: #64ffda;
+  font-weight: 700;
+}
+
+.term-tag-yellow {
+  color: #fbbf24;
+}
+
+.term-tag-magenta {
+  color: #f43f5e;
+}
+
+.term-tag-muted {
+  color: #8ea3cc;
+}
+
+.term-user-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: #ffffff;
+  margin-top: 0.8rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.term-prompt-inline {
+  color: #64ffda;
+  font-weight: 700;
+}
+
+.term-card {
+  background: rgba(13, 27, 58, 0.45);
+  border-left: 3px solid #38bdf8;
+  padding: 0.65rem 0.9rem;
+  margin: 0.5rem 0 0.8rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.term-card-title {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.term-btn-action {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-family: inherit;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.term-btn-action:hover {
+  background: #38bdf8;
+  color: #03060d;
+}
+
+.term-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.term-table td {
+  padding: 0.25rem 0.5rem;
+  vertical-align: top;
+}
+
+.term-table td:first-child {
+  color: #64ffda;
+  font-weight: 700;
+  width: 140px;
+  white-space: nowrap;
+}
+
+/* Terminal Input Bar */
+.terminal-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(13, 27, 58, 0.55);
+  border-top: 1px solid rgba(56, 189, 248, 0.18);
+  padding: 0.65rem 1rem;
+}
+
+.term-prompt {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 700;
+  user-select: none;
+}
+
+.prompt-user {
+  color: #64ffda;
+}
+
+.prompt-at {
+  color: #8ea3cc;
+}
+
+.prompt-host {
+  color: #38bdf8;
+}
+
+.prompt-path {
+  color: #e2e8f0;
+  margin-left: 2px;
+}
+
+.term-input-wrapper {
+  flex: 1;
+}
+
+.term-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  caret-color: #64ffda;
+}
+
+.term-input::placeholder {
+  color: rgba(142, 163, 204, 0.45);
+  font-size: 0.84rem;
+}
+
+.term-send-btn {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.term-send-btn:hover {
+  background: #38bdf8;
+  color: #03060d;
+}
+
+/* Matrix Mode Canvas inside Terminal */
+.term-matrix-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  background: #010804;
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .terminal-launcher-wrap {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+  .terminal-launcher-kbd {
+    display: none;
+  }
+  .ai-terminal-window {
+    height: 90vh;
+    max-height: 90vh;
+  }
+  .prompt-host, .prompt-path {
+    display: none;
+  }
+}
+
