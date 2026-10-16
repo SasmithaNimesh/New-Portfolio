@@ -1325,3 +1325,60 @@ a {
     align-items: flex-start;
   }
 }
+
+
+/* ==========================================================================
+   Interactive Neural Singularity & Math Blast Button Styles
+   ========================================================================== */
+.neural-blast-btn {
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  position: relative;
+}
+
+.neural-blast-btn:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 24px rgba(100, 255, 218, 0.65)) drop-shadow(0 0 40px rgba(56, 189, 248, 0.4));
+}
+
+.neural-blast-btn:active,
+.neural-blast-btn.bursting {
+  transform: scale(0.92);
+  filter: drop-shadow(0 0 35px rgba(100, 255, 218, 0.95)) drop-shadow(0 0 60px rgba(56, 189, 248, 0.8));
+}
+
+.neural-blast-btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(100, 255, 218, 0.3);
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition: all 0.35s ease;
+}
+
+.neural-blast-btn:hover::after {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.neural-blast-btn.bursting::after {
+  animation: blastPulseRing 0.8s ease-out forwards;
+}
+
+@keyframes blastPulseRing {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+    border-color: #64ffda;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+    border-color: #38bdf8;
+  }
+}

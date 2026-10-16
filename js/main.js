@@ -66,6 +66,20 @@ const PROJECTS_DATA = {
  * High-performance 60fps canvas engine simulating neural nodes, synaptic pulses,
  * backpropagation vectors, and floating mathematical manifolds in electric black & blue.
  */
+/**
+ * Interactive Artificial Neural Network (ANN) & Mathematical Theory Background
+ * High-performance 60fps canvas engine simulating neural nodes, synaptic pulses,
+ * backpropagation vectors, and floating mathematical manifolds.
+ *
+ * FEATURING: Interactive Singularity Implosion & Supernova Blast.
+ * When the user activates the blast (via the rotating badge button or canvas click):
+ * 1. Gravitational Singularity Phase: All neural nodes and mathematical theories
+ *    gravitationally accelerate and swirl into a luminous vortex singularity.
+ * 2. Supernova Blast Wave Phase: The singularity detonates into expanding shockwaves,
+ *    blasting neural nodes and math logic equations across the entire web page at
+ *    high relativistic speeds, trailing photon ribbons and electrical lightning arcs,
+ *    before harmonically decelerating and reconnecting back into continuous equilibrium.
+ */
 class ANNMathBackground {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -80,20 +94,44 @@ class ANNMathBackground {
     this.mathSymbols = [];
     this.mouse = { x: -1000, y: -1000, radius: 180 };
 
+    // Rich, authentic AI, deep learning, calculus & quantum physics mathematical theories
     this.mathTheories = [
-      '∇L = ∂L/∂W',
-      'σ(z) = 1/(1+e⁻ᶻ)',
-      'y = f(W·x + b)',
+      '∇_W L = ∂L / ∂W',
+      'σ(z) = 1 / (1 + e^(-z))',
+      'y = f(Wᵀx + b)',
       'J(θ) = -1/m ∑ y log(ŷ)',
-      'f(x) = max(0, x)',
-      'W := W - η·∇L',
-      'eⁱᵠ = cos φ + i sin φ',
-      '∂L/∂a^{[l]}',
+      'ReLU(x) = max(0, x)',
+      'W := W - η ∇_W L',
+      'e^(iπ) + 1 = 0',
+      '∂L / ∂a^[l]',
       'det(A - λI) = 0',
-      'h_{t} = tanh(W·x + U·h_{t-1})',
-      'E = ½∑(y - ŷ)²',
-      'Softmax: eᶻⁱ / ∑eᶻʲ'
+      'h_t = tanh(W x_t + U h_{t-1})',
+      'E = ∑ (y - ŷ)²',
+      'Softmax: e^(z_i) / ∑ e^(z_j)',
+      'Attention(Q,K,V) = softmax(QKᵀ / √d_k) V',
+      'Loss = -log(P(Y|X))',
+      'Adam: m_t = β₁m_{t-1} + (1-β₁)g_t',
+      'dx/dt = σ(y - x)',
+      '∮ B · dl = μ₀ I_enc',
+      'H |ψ⟩ = E |ψ⟩',
+      'KL(P || Q) = ∑ P(x) log(P(x)/Q(x))'
     ];
+
+    // Singularity Implosion & Supernova Blast State Engine
+    this.blastState = {
+      active: false,
+      phase: 'idle', // 'idle' | 'imploding' | 'exploding'
+      targetX: this.width / 2,
+      targetY: this.height / 2,
+      startTime: 0,
+      explodeStartTime: 0,
+      implosionDuration: 850, // ms of gravitational collapse
+      explosionDuration: 2500, // ms of explosive outward expansion and relaxation
+      shockwaves: [],
+      particles: [],
+      hyperArcs: [],
+      flashAlpha: 0
+    };
 
     this.init();
   }
@@ -108,6 +146,11 @@ class ANNMathBackground {
     window.addEventListener('mouseout', () => {
       this.mouse.x = -1000;
       this.mouse.y = -1000;
+    });
+
+    // Bonus: clicking directly on the canvas triggers a localized singularity blast
+    this.canvas.addEventListener('click', (e) => {
+      this.triggerNeuralBlast(e.clientX, e.clientY);
     });
 
     this.spawnNodes();
@@ -127,54 +170,207 @@ class ANNMathBackground {
 
   spawnNodes() {
     this.nodes = [];
-    const nodeCount = Math.floor((this.width * this.height) / 16000); // responsive density
-    const count = Math.min(Math.max(nodeCount, 45), 90);
+    const nodeCount = Math.floor((this.width * this.height) / 16000);
+    const count = Math.min(Math.max(nodeCount, 50), 95);
 
     for (let i = 0; i < count; i++) {
+      const vx = (Math.random() - 0.5) * 0.45;
+      const vy = (Math.random() - 0.5) * 0.45;
       this.nodes.push({
         x: Math.random() * this.width,
         y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
+        vx: vx,
+        vy: vy,
+        baseVx: vx,
+        baseVy: vy,
         radius: Math.random() * 2.2 + 1.2,
-        layer: Math.floor(Math.random() * 4), // 0 to 3 depth
-        activation: Math.random(), // pulsing activation
-        pulseSpeed: 0.015 + Math.random() * 0.02
+        layer: Math.floor(Math.random() * 4),
+        activation: Math.random(),
+        pulseSpeed: 0.015 + Math.random() * 0.02,
+        trail: []
       });
     }
   }
 
   spawnMathSymbols() {
     this.mathSymbols = [];
-    const count = Math.min(Math.floor(this.width / 130), 12);
+    const count = Math.min(Math.floor(this.width / 120), 16);
 
     for (let i = 0; i < count; i++) {
+      const vx = (Math.random() - 0.5) * 0.25;
+      const vy = -0.15 - Math.random() * 0.2;
       this.mathSymbols.push({
         text: this.mathTheories[i % this.mathTheories.length],
         x: Math.random() * this.width,
         y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: -0.15 - Math.random() * 0.2, // gentle drift upwards
-        opacity: 0.08 + Math.random() * 0.12,
+        vx: vx,
+        vy: vy,
+        baseVx: vx,
+        baseVy: vy,
+        opacity: 0.09 + Math.random() * 0.14,
         size: 11 + Math.random() * 4
       });
     }
   }
 
   addSynapticPulse(fromNode, toNode) {
-    if (this.pulses.length > 35) return;
+    if (this.pulses.length > 40) return;
     this.pulses.push({
       fromNode: fromNode,
       toNode: toNode,
       progress: 0,
-      speed: 0.016 + Math.random() * 0.02
+      speed: 0.016 + Math.random() * 0.022
+    });
+  }
+
+  /**
+   * Triggers the Singularity Implosion and Supernova Blast.
+   * All neural nodes and mathematical logics collapse towards (targetX, targetY)
+   * and subsequently blast all over the web page.
+   */
+  triggerNeuralBlast(targetX, targetY) {
+    const x = typeof targetX === 'number' ? targetX : this.width / 2;
+    const y = typeof targetY === 'number' ? targetY : this.height / 2;
+
+    this.blastState = {
+      active: true,
+      phase: 'imploding',
+      targetX: x,
+      targetY: y,
+      startTime: performance.now(),
+      explodeStartTime: 0,
+      implosionDuration: 850,
+      explosionDuration: 2500,
+      shockwaves: [],
+      particles: [],
+      hyperArcs: [],
+      flashAlpha: 0
+    };
+
+    // Store base drift rates on all active nodes & symbols
+    this.nodes.forEach((n) => {
+      n.baseVx = n.baseVx || n.vx;
+      n.baseVy = n.baseVy || n.vy;
+      n.trail = [];
+    });
+    this.mathSymbols.forEach((s) => {
+      s.baseVx = s.baseVx || s.vx;
+      s.baseVy = s.baseVy || s.vy;
     });
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.width, this.height);
+    const now = performance.now();
+    const blast = this.blastState;
 
-    // 1. Subtle Mathematical Grid Lattice & Curves (Vector manifold field)
+    // =========================================================================
+    // 0. HANDLE SINGULARITY COLLAPSE & SUPERNOVA STATE PROGRESSION
+    // =========================================================================
+    let suctionFactor = 0;
+    let swirlAngle = 0;
+
+    if (blast.active) {
+      if (blast.phase === 'imploding') {
+        const elapsed = now - blast.startTime;
+        const progress = Math.min(1, elapsed / blast.implosionDuration);
+        const easeIn = progress * progress * progress;
+
+        suctionFactor = 0.05 + easeIn * 0.35;
+        swirlAngle = (1 - progress) * 8 * Math.sin(progress * Math.PI);
+
+        // Transition from Implosion to Supernova Explosion
+        if (progress >= 1) {
+          blast.phase = 'exploding';
+          blast.explodeStartTime = now;
+          blast.flashAlpha = 0.92;
+
+          // 1. Shockwaves expanding across the screen
+          const maxR = Math.max(this.width, this.height) * 1.5;
+          blast.shockwaves = [
+            { r: 10, maxR: maxR, speed: 36, width: 7, color: 'rgba(100, 255, 218, 0.95)' },
+            { r: 5,  maxR: maxR * 0.95, speed: 25, width: 14, color: 'rgba(56, 189, 248, 0.85)' },
+            { r: 0,  maxR: maxR * 0.85, speed: 17, width: 22, color: 'rgba(147, 51, 234, 0.65)' }
+          ];
+
+          // 2. High-speed Quantum Blast Particles
+          blast.particles = [];
+          for (let p = 0; p < 110; p++) {
+            const angle = Math.random() * Math.PI * 2;
+            const spd = Math.random() * 26 + 8;
+            blast.particles.push({
+              x: blast.targetX,
+              y: blast.targetY,
+              vx: Math.cos(angle) * spd,
+              vy: Math.sin(angle) * spd,
+              life: 1,
+              decay: 0.012 + Math.random() * 0.018,
+              size: Math.random() * 3.2 + 1.2,
+              color: Math.random() > 0.4 ? '#64ffda' : '#38bdf8'
+            });
+          }
+
+          // 3. BLAST ALL NEURAL NODES OUTWARD
+          this.nodes.forEach((a) => {
+            let angle = Math.atan2(a.y - blast.targetY, a.x - blast.targetX);
+            if (Math.hypot(a.x - blast.targetX, a.y - blast.targetY) < 12) {
+              angle = Math.random() * Math.PI * 2;
+            }
+            angle += (Math.random() - 0.5) * 0.45;
+            const blastSpeed = Math.random() * 26 + 14;
+            a.vx = Math.cos(angle) * blastSpeed;
+            a.vy = Math.sin(angle) * blastSpeed;
+            a.activation = 1;
+            a.trail = [];
+          });
+
+          // 4. BLAST ALL MATHEMATICAL LOGICS OUTWARD
+          this.mathSymbols.forEach((sym) => {
+            let angle = Math.atan2(sym.y - blast.targetY, sym.x - blast.targetX);
+            if (Math.hypot(sym.x - blast.targetX, sym.y - blast.targetY) < 15) {
+              angle = Math.random() * Math.PI * 2;
+            }
+            angle += (Math.random() - 0.5) * 0.5;
+            const blastSpeed = Math.random() * 22 + 10;
+            sym.vx = Math.cos(angle) * blastSpeed;
+            sym.vy = Math.sin(angle) * blastSpeed;
+            sym.opacity = 0.95;
+          });
+
+          // Spawn extra mathematical theory burst formulas flying outward
+          for (let b = 0; b < 12; b++) {
+            const angle = Math.random() * Math.PI * 2;
+            const spd = Math.random() * 20 + 8;
+            this.mathSymbols.push({
+              text: this.mathTheories[(b + 7) % this.mathTheories.length],
+              x: blast.targetX,
+              y: blast.targetY,
+              vx: Math.cos(angle) * spd,
+              vy: Math.sin(angle) * spd,
+              baseVx: (Math.random() - 0.5) * 0.25,
+              baseVy: -0.15 - Math.random() * 0.2,
+              opacity: 0.92,
+              size: 13 + Math.random() * 4,
+              isExtra: true
+            });
+          }
+        }
+      } else if (blast.phase === 'exploding') {
+        const expElapsed = now - blast.explodeStartTime;
+        const expProgress = Math.min(1, expElapsed / blast.explosionDuration);
+
+        if (expProgress >= 1) {
+          blast.active = false;
+          blast.phase = 'idle';
+          // Clean up temporary extra burst symbols
+          this.mathSymbols = this.mathSymbols.filter((s) => !s.isExtra);
+        }
+      }
+    }
+
+    // =========================================================================
+    // 1. Subtle Mathematical Grid Lattice (Vector Manifold Field)
+    // =========================================================================
     this.ctx.save();
     this.ctx.strokeStyle = 'rgba(56, 189, 248, 0.025)';
     this.ctx.lineWidth = 1;
@@ -193,65 +389,143 @@ class ANNMathBackground {
     }
     this.ctx.restore();
 
-    // 2. Render Drifting Complex Math Theories & Equations
+    // =========================================================================
+    // 2. Render Mathematical Logic Equations & Theories
+    // =========================================================================
     this.ctx.save();
-    this.ctx.font = '500 12px "Space Grotesk", monospace';
-    this.mathSymbols.forEach((sym) => {
-      sym.x += sym.vx;
-      sym.y += sym.vy;
+    this.ctx.font = '500 12px "Space Grotesk", "JetBrains Mono", monospace';
 
-      if (sym.y < -30) sym.y = this.height + 20;
-      if (sym.x < -100) sym.x = this.width + 50;
-      if (sym.x > this.width + 100) sym.x = -50;
+    this.mathSymbols.forEach((sym) => {
+      if (blast.active && blast.phase === 'imploding') {
+        // Gravitational collapse towards target
+        const dx = blast.targetX - sym.x;
+        const dy = blast.targetY - sym.y;
+        sym.x += dx * suctionFactor;
+        sym.y += dy * suctionFactor;
+        sym.opacity = Math.min(1, sym.opacity + 0.02);
+      } else if (blast.active && blast.phase === 'exploding') {
+        // Outward explosion drift with friction deceleration
+        sym.x += sym.vx;
+        sym.y += sym.vy;
+        sym.vx = sym.vx * 0.94 + sym.baseVx * 0.06;
+        sym.vy = sym.vy * 0.94 + sym.baseVy * 0.06;
+        sym.opacity = Math.max(0.12, sym.opacity * 0.985);
+      } else {
+        // Normal ambient float
+        sym.x += sym.vx;
+        sym.y += sym.vy;
+      }
+
+      // Continuous canvas wrap-around
+      if (sym.y < -40) sym.y = this.height + 30;
+      if (sym.y > this.height + 40) sym.y = -30;
+      if (sym.x < -140) sym.x = this.width + 60;
+      if (sym.x > this.width + 140) sym.x = -60;
 
       this.ctx.fillStyle = `rgba(56, 189, 248, ${sym.opacity})`;
+      if (sym.opacity > 0.4) {
+        this.ctx.shadowColor = '#64ffda';
+        this.ctx.shadowBlur = 8;
+      }
       this.ctx.fillText(sym.text, sym.x, sym.y);
+      this.ctx.shadowBlur = 0;
     });
     this.ctx.restore();
 
-    // 3. Update & Draw Neural Synapses (Interconnections)
+    // =========================================================================
+    // 3. Update & Draw Neural Synapses (Interconnections) & Nodes
+    // =========================================================================
     const maxDist = 155;
     for (let i = 0; i < this.nodes.length; i++) {
       const a = this.nodes[i];
 
-      // Move nodes
-      a.x += a.vx;
-      a.y += a.vy;
+      if (blast.active && blast.phase === 'imploding') {
+        // Gravitational suction vector
+        const dx = blast.targetX - a.x;
+        const dy = blast.targetY - a.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        a.x += dx * suctionFactor;
+        a.y += dy * suctionFactor;
 
-      // Resilient boundary clamping & bouncing
+        // Tangential vortex swirl
+        a.x += (-dy / dist) * swirlAngle;
+        a.y += (dx / dist) * swirlAngle;
+        a.activation += 0.08;
+      } else if (blast.active && blast.phase === 'exploding') {
+        // Explosive outward trajectory with friction
+        a.x += a.vx;
+        a.y += a.vy;
+        a.vx = a.vx * 0.935 + a.baseVx * 0.065;
+        a.vy = a.vy * 0.935 + a.baseVy * 0.065;
+
+        // Track luminous particle trails during blast
+        a.trail.push({ x: a.x, y: a.y });
+        if (a.trail.length > 5) a.trail.shift();
+      } else {
+        // Natural ambient drift
+        a.x += a.vx;
+        a.y += a.vy;
+        if (a.trail && a.trail.length > 0) a.trail.shift();
+      }
+
+      // Boundary bouncing
       if (a.x < 0) { a.x = 0; a.vx = Math.abs(a.vx); }
       else if (a.x > this.width) { a.x = this.width; a.vx = -Math.abs(a.vx); }
       if (a.y < 0) { a.y = 0; a.vy = Math.abs(a.vy); }
       else if (a.y > this.height) { a.y = this.height; a.vy = -Math.abs(a.vy); }
 
-      // Mouse interactivity (neural excitation field)
-      const dxMouse = a.x - this.mouse.x;
-      const dyMouse = a.y - this.mouse.y;
-      const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-      if (distMouse < this.mouse.radius) {
-        const force = (1 - distMouse / this.mouse.radius) * 0.6;
-        a.x += (dxMouse / distMouse) * force * 3;
-        a.y += (dyMouse / distMouse) * force * 3;
+      // Mouse interactive excitation field (when not in singularity lock)
+      if (!blast.active) {
+        const dxMouse = a.x - this.mouse.x;
+        const dyMouse = a.y - this.mouse.y;
+        const distMouse = Math.hypot(dxMouse, dyMouse);
+        if (distMouse < this.mouse.radius) {
+          const force = (1 - distMouse / this.mouse.radius) * 0.6;
+          a.x += (dxMouse / distMouse) * force * 3;
+          a.y += (dyMouse / distMouse) * force * 3;
+        }
       }
 
-      // Synaptic links
+      // Render Luminous Motion Trails during blast
+      if (a.trail && a.trail.length > 1) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(a.trail[0].x, a.trail[0].y);
+        for (let t = 1; t < a.trail.length; t++) {
+          this.ctx.lineTo(a.trail[t].x, a.trail[t].y);
+        }
+        this.ctx.strokeStyle = 'rgba(100, 255, 218, 0.45)';
+        this.ctx.lineWidth = 1.6;
+        this.ctx.stroke();
+      }
+
+      // Synaptic Links between connected nodes
       for (let j = i + 1; j < this.nodes.length; j++) {
         const b = this.nodes[j];
         const dx = a.x - b.x;
         const dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const dist = Math.hypot(dx, dy);
 
         if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.28;
+          let alpha = (1 - dist / maxDist) * 0.28;
+          let strokeColor = `rgba(37, 99, 235, ${alpha})`;
+          let lineW = a.layer === b.layer ? 1.2 : 0.7;
+
+          // Charge synapses during implosion or explosion
+          if (blast.active) {
+            alpha = Math.min(0.85, alpha * 2.5);
+            strokeColor = `rgba(100, 255, 218, ${alpha})`;
+            lineW *= 1.8;
+          }
+
           this.ctx.beginPath();
-          this.ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-          this.ctx.lineWidth = a.layer === b.layer ? 1.2 : 0.7;
+          this.ctx.strokeStyle = strokeColor;
+          this.ctx.lineWidth = lineW;
           this.ctx.moveTo(a.x, a.y);
           this.ctx.lineTo(b.x, b.y);
           this.ctx.stroke();
 
           // Occasionally trigger electrical synaptic pulse
-          if (Math.random() < 0.0007) {
+          if (Math.random() < 0.0008) {
             this.addSynapticPulse(a, b);
           }
         }
@@ -261,23 +535,27 @@ class ANNMathBackground {
       a.activation += a.pulseSpeed;
       const glow = Math.sin(a.activation) * 0.5 + 0.5;
 
-      // Radial node glow
+      // Radial node halo
       this.ctx.beginPath();
       this.ctx.arc(a.x, a.y, a.radius * 2.5, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(56, 189, 248, ${0.08 + glow * 0.15})`;
+      this.ctx.fillStyle = blast.active
+        ? `rgba(100, 255, 218, ${0.15 + glow * 0.25})`
+        : `rgba(56, 189, 248, ${0.08 + glow * 0.15})`;
       this.ctx.fill();
 
       // Node core
       this.ctx.beginPath();
       this.ctx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
-      this.ctx.fillStyle = glow > 0.7 ? '#64ffda' : '#38bdf8';
-      this.ctx.shadowColor = '#38bdf8';
-      this.ctx.shadowBlur = 6;
+      this.ctx.fillStyle = blast.active || glow > 0.7 ? '#64ffda' : '#38bdf8';
+      this.ctx.shadowColor = blast.active ? '#64ffda' : '#38bdf8';
+      this.ctx.shadowBlur = blast.active ? 12 : 6;
       this.ctx.fill();
-      this.ctx.shadowBlur = 0; // reset
+      this.ctx.shadowBlur = 0;
     }
 
-    // 4. Update & Draw Synaptic Electrical Pulses (Spikes with comet trail)
+    // =========================================================================
+    // 4. Update & Draw Synaptic Electrical Pulses (Comet Spikes)
+    // =========================================================================
     for (let k = this.pulses.length - 1; k >= 0; k--) {
       const p = this.pulses[k];
       p.progress += p.speed;
@@ -290,7 +568,6 @@ class ANNMathBackground {
       const currX = p.fromNode.x + (p.toNode.x - p.fromNode.x) * p.progress;
       const currY = p.fromNode.y + (p.toNode.y - p.fromNode.y) * p.progress;
 
-      // Draw electrical comet tail
       const tailProgress = Math.max(0, p.progress - 0.22);
       const tailX = p.fromNode.x + (p.toNode.x - p.fromNode.x) * tailProgress;
       const tailY = p.fromNode.y + (p.toNode.y - p.fromNode.y) * tailProgress;
@@ -302,7 +579,6 @@ class ANNMathBackground {
       this.ctx.lineWidth = 1.8;
       this.ctx.stroke();
 
-      // Glowing pulse head
       this.ctx.beginPath();
       this.ctx.arc(currX, currY, 2.4, 0, Math.PI * 2);
       this.ctx.fillStyle = '#64ffda';
@@ -311,6 +587,106 @@ class ANNMathBackground {
       this.ctx.fill();
       this.ctx.shadowBlur = 0;
     }
+
+    // =========================================================================
+    // 5. RENDER SINGULARITY ACCRETION DISK & CONTRACTION RINGS (Implosion)
+    // =========================================================================
+    if (blast.active && blast.phase === 'imploding') {
+      const elapsed = now - blast.startTime;
+      const prog = Math.min(1, elapsed / blast.implosionDuration);
+
+      // Contracting gravitational rings
+      for (let rIdx = 0; rIdx < 3; rIdx++) {
+        const ringProg = (prog + rIdx * 0.33) % 1;
+        const radius = (1 - ringProg) * 160 + 10;
+        this.ctx.beginPath();
+        this.ctx.arc(blast.targetX, blast.targetY, radius, 0, Math.PI * 2);
+        this.ctx.strokeStyle = `rgba(100, 255, 218, ${0.3 + ringProg * 0.5})`;
+        this.ctx.lineWidth = 1.5 + ringProg * 2.5;
+        this.ctx.stroke();
+      }
+
+      // Singularity luminous core
+      const coreR = 30 + prog * 40;
+      const coreGrad = this.ctx.createRadialGradient(
+        blast.targetX, blast.targetY, 0,
+        blast.targetX, blast.targetY, coreR
+      );
+      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      coreGrad.addColorStop(0.3, 'rgba(100, 255, 218, 0.75)');
+      coreGrad.addColorStop(0.7, 'rgba(56, 189, 248, 0.4)');
+      coreGrad.addColorStop(1, 'rgba(15, 23, 42, 0)');
+
+      this.ctx.fillStyle = coreGrad;
+      this.ctx.beginPath();
+      this.ctx.arc(blast.targetX, blast.targetY, coreR, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      // Electrical crackles into nearby converging nodes
+      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      this.ctx.lineWidth = 1.5;
+      for (let c = 0; c < 5; c++) {
+        const randNode = this.nodes[Math.floor(Math.random() * this.nodes.length)];
+        if (randNode && Math.hypot(randNode.x - blast.targetX, randNode.y - blast.targetY) < 220) {
+          const midX = (blast.targetX + randNode.x) / 2 + (Math.random() - 0.5) * 30;
+          const midY = (blast.targetY + randNode.y) / 2 + (Math.random() - 0.5) * 30;
+          this.ctx.beginPath();
+          this.ctx.moveTo(blast.targetX, blast.targetY);
+          this.ctx.lineTo(midX, midY);
+          this.ctx.lineTo(randNode.x, randNode.y);
+          this.ctx.stroke();
+        }
+      }
+    }
+
+    // =========================================================================
+    // 6. RENDER SUPERNOVA DETONATION (Shockwaves, Sparks & Flash)
+    // =========================================================================
+    if (blast.active && blast.phase === 'exploding') {
+      // 6a. Full-screen flash
+      if (blast.flashAlpha > 0.02) {
+        this.ctx.fillStyle = `rgba(255, 255, 255, ${blast.flashAlpha * 0.4})`;
+        this.ctx.fillRect(0, 0, this.width, this.height);
+        blast.flashAlpha *= 0.86;
+      }
+
+      // 6b. Supersonic shockwaves expanding across the screen
+      blast.shockwaves.forEach((w) => {
+        w.r += w.speed;
+        w.speed *= 0.97;
+        const waveAlpha = Math.max(0, 1 - w.r / w.maxR);
+        if (waveAlpha > 0) {
+          this.ctx.beginPath();
+          this.ctx.arc(blast.targetX, blast.targetY, w.r, 0, Math.PI * 2);
+          this.ctx.strokeStyle = w.color.replace(/[\d\.]+\)$/, `${(waveAlpha * 0.85).toFixed(2)})`);
+          this.ctx.lineWidth = w.width * waveAlpha;
+          this.ctx.stroke();
+        }
+      });
+
+      // 6c. High-velocity quantum particles
+      for (let k = blast.particles.length - 1; k >= 0; k--) {
+        const pt = blast.particles[k];
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.vx *= 0.955;
+        pt.vy *= 0.955;
+        pt.life -= pt.decay;
+
+        if (pt.life <= 0) {
+          blast.particles.splice(k, 1);
+          continue;
+        }
+
+        this.ctx.beginPath();
+        this.ctx.arc(pt.x, pt.y, pt.size * pt.life, 0, Math.PI * 2);
+        this.ctx.fillStyle = pt.color;
+        this.ctx.shadowColor = pt.color;
+        this.ctx.shadowBlur = 8;
+        this.ctx.fill();
+        this.ctx.shadowBlur = 0;
+      }
+    }
   }
 
   animate() {
@@ -318,6 +694,7 @@ class ANNMathBackground {
     requestAnimationFrame(() => this.animate());
   }
 }
+
 
 class PortfolioApp {
   constructor() {
@@ -334,7 +711,7 @@ class PortfolioApp {
     this.initHeaderScroll();
     this.initScrollAnimations();
     this.initHeroSlideshow();
-    this.initVideoLightbox();
+    this.initNeuralBlastTrigger();
     this.initCaseStudies();
     this.initMobileMenu();
     this.initThoughts();
@@ -542,42 +919,27 @@ class PortfolioApp {
     goToSlide(0);
   }
 
-  // Video Lightbox Modal
-  initVideoLightbox() {
-    const triggers = document.querySelectorAll('[data-open-reel]');
-    const lightbox = document.querySelector('.video-lightbox');
-    const closeBtn = document.querySelector('.video-lightbox-close');
-    const video = document.querySelector('.video-lightbox video');
-
-    if (!lightbox) return;
+  // Interactive Neural Singularity & Math Blast Trigger
+  initNeuralBlastTrigger() {
+    const triggers = document.querySelectorAll('[data-trigger-blast], [data-open-reel], .rotating-reel-btn');
 
     triggers.forEach((trigger) => {
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
-        lightbox.classList.add('active');
-        if (video) {
-          video.currentTime = 0;
-          const playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(() => {
-              // Autoplay policy fallback: video remains ready for user click
-            });
-          }
+
+        // Visual click feedback on the rotating button
+        trigger.classList.add('bursting');
+        setTimeout(() => trigger.classList.remove('bursting'), 900);
+
+        // Get exact center of button for blast origin
+        const rect = trigger.getBoundingClientRect();
+        const originX = rect.left + rect.width / 2;
+        const originY = rect.top + rect.height / 2;
+
+        if (this.annBg) {
+          this.annBg.triggerNeuralBlast(originX, originY);
         }
       });
-    });
-
-    const closeReel = () => {
-      lightbox.classList.remove('active');
-      if (video) video.pause();
-    };
-
-    if (closeBtn) closeBtn.addEventListener('click', closeReel);
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeReel();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) closeReel();
     });
   }
 
