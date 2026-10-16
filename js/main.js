@@ -715,7 +715,7 @@ class PortfolioApp {
     this.initCaseStudies();
     this.initMobileMenu();
     this.initThoughts();
-    this.initTerminal();
+    this.initAIAssistant();
   }
 
   initANNBackground() {
@@ -1079,174 +1079,113 @@ class PortfolioApp {
     });
   }
 
-  // Interactive AI Developer Terminal Console
-  initTerminal() {
-    this.terminal = new InteractiveTerminal(this);
+  // Floating AI Assistant & Interactive Options Popup
+  initAIAssistant() {
+    this.aiAssistant = new FloatingAIAssistant(this);
   }
 }
 
 /**
- * Interactive AI & Developer Console Terminal
- * Provides a terminal interface, CLI commands, NLP Q&A, and interactive actions.
+ * Floating AI Assistant & Interactive Options Popup
+ * Seamlessly matches the portfolio's aesthetics, provides quick action cards,
+ * interactive project modals, and natural language Q&A.
  */
-class InteractiveTerminal {
+class FloatingAIAssistant {
   constructor(app) {
     this.app = app;
-    this.backdrop = document.getElementById('ai-terminal-modal');
-    this.windowEl = this.backdrop?.querySelector('.ai-terminal-window');
-    this.output = document.getElementById('terminal-output');
-    this.input = document.getElementById('terminal-input');
-    this.form = document.getElementById('terminal-form');
-    this.launcherBtn = document.getElementById('terminal-launcher-btn');
-    this.navBtn = document.getElementById('nav-terminal-btn');
-    this.closeBtn = document.getElementById('term-close-btn');
-    this.minBtn = document.getElementById('term-min-btn');
-    this.maxBtn = document.getElementById('term-max-btn');
-    this.chips = document.querySelectorAll('.term-chip');
-
-    this.history = [];
-    this.historyIndex = -1;
+    this.fab = document.getElementById('ai-fab-btn');
+    this.popup = document.getElementById('ai-assistant-popup');
+    this.closeBtn = document.getElementById('ai-close-btn');
+    this.resetBtn = document.getElementById('ai-reset-btn');
+    this.container = document.getElementById('ai-messages-container');
+    this.optionsGrid = document.getElementById('ai-options-grid');
+    this.form = document.getElementById('ai-chat-form');
+    this.input = document.getElementById('ai-chat-input');
     this.isOpen = false;
-    this.isMaximized = false;
-    this.matrixInterval = null;
 
-    this.commandsList = [
-      'help', 'about', 'skills', 'projects', 'open', 'contact',
-      'resume', 'blast', 'matrix', 'hire', 'clear', 'exit'
-    ];
-
-    if (this.backdrop && this.input && this.form) {
+    if (this.fab && this.popup) {
       this.initEvents();
-      this.printWelcome();
     }
   }
 
   initEvents() {
-    // Launcher button click
-    this.launcherBtn?.addEventListener('click', () => this.toggle());
+    // Toggle popup on FAB click
+    this.fab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.toggle();
+    });
 
-    // Nav console button click
-    this.navBtn?.addEventListener('click', () => this.toggle());
-
-    // Close buttons
+    // Close button
     this.closeBtn?.addEventListener('click', () => this.close());
-    this.minBtn?.addEventListener('click', () => this.close());
 
-    // Maximize button
-    this.maxBtn?.addEventListener('click', () => this.toggleMaximize());
+    // Reset button
+    this.resetBtn?.addEventListener('click', () => this.reset());
 
-    // Click backdrop to close
-    this.backdrop?.addEventListener('click', (e) => {
-      if (e.target === this.backdrop) this.close();
-    });
-
-    // Form submit / Command execution
-    this.form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const raw = this.input.value;
-      if (!raw.trim()) return;
-      this.execute(raw);
-      this.input.value = '';
-    });
-
-    // Quick chips
-    this.chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        const cmd = chip.getAttribute('data-cmd');
-        if (cmd) {
-          this.execute(cmd);
-          if (this.input) this.input.focus();
-        }
-      });
-    });
-
-    // Keyboard shortcuts & history navigation
-    document.addEventListener('keydown', (e) => {
-      // Toggle terminal via backtick (`) or Ctrl+K / Cmd+K
-      if ((e.key === '`' && !this.isTypingInOtherInput(e)) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
-        e.preventDefault();
-        this.toggle();
-        return;
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (this.isOpen && !this.popup.contains(e.target) && !this.fab.contains(e.target)) {
+        this.close();
       }
+    });
 
-      // Close on Escape if terminal is active
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.isOpen) {
         this.close();
+      }
+    });
+
+    // Option cards click
+    this.popup.addEventListener('click', (e) => {
+      const card = e.target.closest('.ai-opt-card');
+      if (card) {
+        const action = card.getAttribute('data-action');
+        if (action) {
+          this.handleAction(action);
+        }
         return;
       }
 
-      // History navigation when terminal input is focused
-      if (this.isOpen && document.activeElement === this.input) {
-        if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          if (this.history.length > 0) {
-            if (this.historyIndex === -1) {
-              this.historyIndex = this.history.length - 1;
-            } else if (this.historyIndex > 0) {
-              this.historyIndex--;
-            }
-            this.input.value = this.history[this.historyIndex] || '';
-          }
-        } else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (this.historyIndex !== -1) {
-            if (this.historyIndex < this.history.length - 1) {
-              this.historyIndex++;
-              this.input.value = this.history[this.historyIndex];
-            } else {
-              this.historyIndex = -1;
-              this.input.value = '';
-            }
-          }
-        } else if (e.key === 'Tab') {
-          // Autocomplete matching commands
-          e.preventDefault();
-          const current = this.input.value.trim().toLowerCase();
-          if (current) {
-            const match = this.commandsList.find((c) => c.startsWith(current));
-            if (match) {
-              this.input.value = match;
-            }
-          }
-        }
-      }
-    });
+      // Delegate clicks for dynamic buttons inside message cards
+      const actionBtn = e.target.closest('[data-ai-action]');
+      if (actionBtn) {
+        const act = actionBtn.getAttribute('data-ai-action');
+        const val = actionBtn.getAttribute('data-ai-val');
 
-    // Delegate clicks for inline terminal action buttons
-    this.output?.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-term-action]');
-      if (!btn) return;
-      const action = btn.getAttribute('data-term-action');
-      const val = btn.getAttribute('data-term-val');
-
-      if (action === 'open-project') {
-        if (this.app?.openCaseStudy) {
+        if (act === 'open-study' && this.app?.openCaseStudy) {
           this.app.openCaseStudy(val);
+        } else if (act === 'copy-email') {
+          navigator.clipboard.writeText(val || 'rmsasmithanimesh@gmail.com').then(() => {
+            const originalText = actionBtn.innerHTML;
+            actionBtn.innerHTML = '✓ Copied to clipboard!';
+            setTimeout(() => (actionBtn.innerHTML = originalText), 2200);
+          });
+        } else if (act === 'trigger-blast' && this.app?.annBg) {
+          const x = window.innerWidth / 2;
+          const y = window.innerHeight / 2;
+          this.app.annBg.triggerNeuralBlast(x, y);
+        } else if (act === 'open-resume') {
+          window.open('assets/resume.pdf', '_blank');
         }
-      } else if (action === 'copy-email') {
-        navigator.clipboard.writeText(val || 'rmsasmithanimesh@gmail.com').then(() => {
-          btn.textContent = '✓ Copied!';
-          setTimeout(() => (btn.textContent = 'Copy Email'), 2000);
-        });
-      } else if (action === 'run-cmd') {
-        this.execute(val);
       }
     });
-  }
 
-  isTypingInOtherInput(e) {
-    const active = document.activeElement;
-    if (!active) return false;
-    const tag = active.tagName.toLowerCase();
-    return (tag === 'input' && active !== this.input) || tag === 'textarea';
+    // Chat form submit
+    this.form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = this.input.value.trim();
+      if (!message) return;
+
+      this.input.value = '';
+      this.handleUserMessage(message);
+    });
   }
 
   open() {
-    if (!this.backdrop) return;
     this.isOpen = true;
-    this.backdrop.classList.add('active');
-    this.backdrop.setAttribute('aria-hidden', 'false');
-    this.launcherBtn?.setAttribute('aria-expanded', 'true');
+    this.popup.classList.add('active');
+    this.popup.setAttribute('aria-hidden', 'false');
+    this.fab.setAttribute('aria-expanded', 'true');
     setTimeout(() => {
       this.input?.focus();
       this.scrollToBottom();
@@ -1254,15 +1193,10 @@ class InteractiveTerminal {
   }
 
   close() {
-    if (!this.backdrop) return;
     this.isOpen = false;
-    this.backdrop.classList.remove('active');
-    this.backdrop.setAttribute('aria-hidden', 'true');
-    this.launcherBtn?.setAttribute('aria-expanded', 'false');
-    if (this.matrixInterval) {
-      clearInterval(this.matrixInterval);
-      this.matrixInterval = null;
-    }
+    this.popup.classList.remove('active');
+    this.popup.setAttribute('aria-hidden', 'true');
+    this.fab.setAttribute('aria-expanded', 'false');
   }
 
   toggle() {
@@ -1273,396 +1207,313 @@ class InteractiveTerminal {
     }
   }
 
-  toggleMaximize() {
-    if (!this.windowEl) return;
-    this.isMaximized = !this.isMaximized;
-    this.windowEl.classList.toggle('is-maximized', this.isMaximized);
-    this.scrollToBottom();
-  }
+  reset() {
+    if (!this.container) return;
+    this.container.innerHTML = `
+      <div class="ai-msg ai-msg-bot animate-fade">
+        <div class="ai-msg-bubble">
+          <p class="ai-msg-greeting">
+            Hello! 👋 I'm <strong>Sasmitha's AI Assistant</strong>.
+          </p>
+          <p class="ai-msg-intro">
+            Trained on Sasmitha's academic background, machine learning models, and engineering projects. Choose an option below or ask me anything!
+          </p>
+        </div>
+      </div>
 
-  print(html) {
-    if (!this.output) return;
-    const line = document.createElement('div');
-    line.className = 'term-line';
-    line.innerHTML = html;
-    this.output.appendChild(line);
+      <div class="ai-options-section" id="ai-options-grid">
+        <div class="ai-options-label">Recommended Options</div>
+        <div class="ai-options-grid">
+          <button class="ai-opt-card" data-action="projects">
+            <span class="ai-opt-icon">🚀</span>
+            <div class="ai-opt-meta">
+              <strong>Explore Projects</strong>
+              <span>Case studies &amp; live demos</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="skills">
+            <span class="ai-opt-icon">⚡</span>
+            <div class="ai-opt-meta">
+              <strong>Technical Arsenal</strong>
+              <span>AI, Full-Stack &amp; IoT stack</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="resume">
+            <span class="ai-opt-icon">📄</span>
+            <div class="ai-opt-meta">
+              <strong>View Resume</strong>
+              <span>Download PDF directly</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="contact">
+            <span class="ai-opt-icon">📬</span>
+            <div class="ai-opt-meta">
+              <strong>Get in Touch</strong>
+              <span>Email &amp; verified profiles</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="blast">
+            <span class="ai-opt-icon">🌌</span>
+            <div class="ai-opt-meta">
+              <strong>Neural Singularity</strong>
+              <span>Trigger particle explosion</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="hire">
+            <span class="ai-opt-icon">🤝</span>
+            <div class="ai-opt-meta">
+              <strong>Hire / Availability</strong>
+              <span>Global remote &amp; roles</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    `;
     this.scrollToBottom();
   }
 
   scrollToBottom() {
-    if (this.output) {
-      this.output.scrollTop = this.output.scrollHeight;
+    if (this.container) {
+      this.container.scrollTop = this.container.scrollHeight;
     }
   }
 
-  printWelcome() {
-    const ascii = `
- ███████╗ █████╗ ███████╗███╗   ███╗██╗████████╗██╗  ██╗ █████╗ 
- ██╔════╝██╔══██╗██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║██╔══██╗
- ███████╗███████║███████╗██╔████╔██║██║   ██║   ███████║███████║
- ╚════██║██╔══██║╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║██╔══██║
- ███████║██║  ██║███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║██║  ██║
- ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝`;
-
-    this.print(`<pre class="term-banner-ascii">${ascii}</pre>`);
-    this.print(`<div class="term-line"><span class="term-tag-cyan">● Neural-Core v2.5 Interactive Terminal</span> initialized.</div>`);
-    this.print(`<div class="term-line"><span class="term-tag-muted">Guest session established. Type <span class="term-tag-emerald">'help'</span> for command index or ask any question.</span></div>`);
-    this.print(`<div class="term-line" style="margin-top:0.3rem;"><span class="term-tag-yellow">Tip:</span> Use Up/Down arrows for history, Tab for autocomplete, or click any chip above.</div>`);
+  appendUserBubble(text) {
+    const bubble = document.createElement('div');
+    bubble.className = 'ai-msg ai-msg-user';
+    bubble.innerHTML = `<div class="ai-msg-bubble">${this.escapeHtml(text)}</div>`;
+    this.container.appendChild(bubble);
+    this.scrollToBottom();
   }
 
-  execute(raw) {
-    const trimmed = raw.trim();
-    if (!trimmed) return;
-
-    // Track history
-    this.history.push(trimmed);
-    this.historyIndex = -1;
-
-    // Display user command prompt
-    this.print(`
-      <div class="term-user-entry">
-        <span class="term-prompt-inline">guest@sasmitha.ai:~$</span>
-        <span>${this.escapeHtml(trimmed)}</span>
+  showTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.className = 'ai-msg ai-msg-bot ai-typing-wrapper';
+    indicator.innerHTML = `
+      <div class="ai-typing-indicator">
+        <span class="ai-typing-dot"></span>
+        <span class="ai-typing-dot"></span>
+        <span class="ai-typing-dot"></span>
       </div>
-    `);
+    `;
+    this.container.appendChild(indicator);
+    this.scrollToBottom();
+    return indicator;
+  }
 
-    const lower = trimmed.toLowerCase();
-    const parts = lower.split(/\s+/);
-    const cmd = parts[0];
-    const arg = parts.slice(1).join(' ');
+  appendBotBubble(htmlContent) {
+    const bubble = document.createElement('div');
+    bubble.className = 'ai-msg ai-msg-bot';
+    bubble.innerHTML = `<div class="ai-msg-bubble">${htmlContent}</div>`;
+    this.container.appendChild(bubble);
+    this.scrollToBottom();
+  }
 
-    switch (cmd) {
-      case 'help':
-      case 'commands':
-      case '?':
-        this.cmdHelp();
-        break;
+  handleAction(action) {
+    switch (action) {
+      case 'projects':
+        this.appendUserBubble('Explore Selected Projects');
+        this.replyWithTyping(`
+          <p style="color:#ffffff; font-weight:700; margin-bottom:0.4rem;">Featured Engineering Works</p>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Click any project to inspect the case study:</p>
+          
+          <div class="ai-rich-card">
+            <h4>Student Performance Analysis</h4>
+            <p>R Language &bull; Statistics &bull; Exploratory Data Analysis &bull; Hypothesis Testing</p>
+            <button class="ai-rich-btn" data-ai-action="open-study" data-ai-val="student-performance">Open Case Study &rarr;</button>
+          </div>
 
-      case 'about':
-      case 'bio':
-      case 'whoami':
-        this.cmdAbout();
+          <div class="ai-rich-card">
+            <h4>Smart Shopping Buddy</h4>
+            <p>ESP32 IoT &bull; RFID Scanning &bull; Load Cell Calibration &bull; Firebase Cloud &bull; Telegram</p>
+            <button class="ai-rich-btn" data-ai-action="open-study" data-ai-val="smart-shopping-cart">Open Case Study &rarr;</button>
+          </div>
+
+          <div class="ai-rich-card">
+            <h4>AgroVision Smart Farming</h4>
+            <p>Java OOP &bull; Swing GUI &bull; Automated Irrigation Schedule</p>
+            <button class="ai-rich-btn" data-ai-action="open-study" data-ai-val="agrovision">Open Case Study &rarr;</button>
+          </div>
+
+          <div class="ai-rich-card">
+            <h4>Connect Lanka Tourism</h4>
+            <p>Full-Stack JavaScript &bull; MongoDB &bull; MySQL &bull; Responsive Platform</p>
+            <button class="ai-rich-btn" data-ai-action="open-study" data-ai-val="connect-lanka">Open Case Study &rarr;</button>
+          </div>
+        `);
         break;
 
       case 'skills':
-      case 'arsenal':
-      case 'stack':
-        this.cmdSkills();
-        break;
+        this.appendUserBubble('Inspect Technical Arsenal');
+        this.replyWithTyping(`
+          <p style="color:#ffffff; font-weight:700; margin-bottom:0.4rem;">Sasmitha's Technical Arsenal</p>
+          
+          <div class="ai-rich-card" style="border-left: 3px solid #38bdf8;">
+            <h4 style="color:#38bdf8;">01. AI &amp; Data Science</h4>
+            <p>Python, R Studio, ProLog, PyTorch/ML, Computer Vision, NLP, MongoDB, Statistical Modeling.</p>
+          </div>
 
-      case 'projects':
-      case 'work':
-        this.cmdProjects();
-        break;
+          <div class="ai-rich-card" style="border-left: 3px solid #64ffda;">
+            <h4 style="color:#64ffda;">02. Engineering &amp; Web</h4>
+            <p>Java (OOP), JavaScript (ES6+), React.js, Node.js, HTML5 &amp; CSS3, MySQL, Git &amp; GitHub Actions.</p>
+          </div>
 
-      case 'open':
-        this.cmdOpenProject(arg);
-        break;
-
-      case 'contact':
-      case 'email':
-        this.cmdContact();
+          <div class="ai-rich-card" style="border-left: 3px solid #38bdf8;">
+            <h4 style="color:#38bdf8;">03. Robotics &amp; IoT</h4>
+            <p>ESP32 Microcontrollers, RFID Systems, Sensor Calibration, Firebase Cloud, Telegram Bot API.</p>
+          </div>
+        `);
         break;
 
       case 'resume':
-      case 'cv':
-        this.cmdResume();
+        this.appendUserBubble('View or Download Resume');
+        this.replyWithTyping(`
+          <p style="color:#ffffff; font-weight:700; margin-bottom:0.3rem;">Curriculum Vitae</p>
+          <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.6rem;">
+            Sasmitha's verified CV highlights his BSc (Hons) Computer Science with AI degree, research projects, and work experience.
+          </p>
+          <button class="ai-rich-btn" data-ai-action="open-resume" style="background:#2563eb; color:#ffffff; border:none; padding:0.5rem 0.9rem;">
+            Open Resume (PDF) &rarr;
+          </button>
+        `);
+        break;
+
+      case 'contact':
+        this.appendUserBubble('Get in Touch');
+        this.replyWithTyping(`
+          <p style="color:#ffffff; font-weight:700; margin-bottom:0.3rem;">Direct Channels</p>
+          <div class="ai-rich-card">
+            <p style="color:#ffffff; margin-bottom:0.3rem;"><strong>Email:</strong> rmsasmithanimesh@gmail.com</p>
+            <button class="ai-rich-btn" data-ai-action="copy-email" data-ai-val="rmsasmithanimesh@gmail.com">Copy Email</button>
+          </div>
+          <div style="margin-top:0.6rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a href="https://www.linkedin.com/in/sasmitha-nimesh-rathnayaka/" target="_blank" rel="noopener noreferrer" class="ai-rich-btn">LinkedIn Profile &rarr;</a>
+            <a href="https://github.com/SasmithaNimesh" target="_blank" rel="noopener noreferrer" class="ai-rich-btn">GitHub Profile &rarr;</a>
+          </div>
+        `);
         break;
 
       case 'blast':
-      case 'singularity':
-        this.cmdBlast();
-        break;
-
-      case 'matrix':
-        this.cmdMatrix();
+        this.appendUserBubble('Activate Neural Singularity Blast');
+        this.replyWithTyping(`
+          <p style="color:#64ffda; font-weight:700; margin-bottom:0.3rem;">⚡ Neural Singularity Activated!</p>
+          <p style="font-size:0.86rem; color:var(--text-muted);">
+            The mathematical logic &amp; synaptic particle explosion has been triggered across the canvas background!
+          </p>
+          <button class="ai-rich-btn" data-ai-action="trigger-blast" style="margin-top:0.4rem;">Trigger Again ✦</button>
+        `);
+        if (this.app?.annBg) {
+          const x = window.innerWidth / 2;
+          const y = window.innerHeight / 2;
+          this.app.annBg.triggerNeuralBlast(x, y);
+        }
         break;
 
       case 'hire':
-      case 'status':
-        this.cmdHire();
-        break;
-
-      case 'clear':
-      case 'cls':
-        this.cmdClear();
-        break;
-
-      case 'exit':
-      case 'quit':
-      case 'close':
-        this.close();
-        break;
-
-      default:
-        this.handleNaturalLanguageQuery(lower, trimmed);
+        this.appendUserBubble('Recruiter &amp; Role Opportunities');
+        this.replyWithTyping(`
+          <p style="color:#64ffda; font-weight:700; margin-bottom:0.3rem;">● Open for Opportunities</p>
+          <p style="font-size:0.86rem; color:#cbd5e1; line-height:1.5;">
+            Sasmitha is actively considering <strong>AI Engineer</strong>, <strong>Machine Learning Developer</strong>, and <strong>Full-Stack Software Engineer</strong> roles.
+          </p>
+          <div class="ai-rich-card" style="margin-top:0.5rem;">
+            <p><strong>Location:</strong> Sri Lanka (Available for Global Remote &amp; Relocation)</p>
+            <p><strong>Education:</strong> BSc (Hons) Computer Science with AI</p>
+            <a href="mailto:rmsasmithanimesh@gmail.com" class="ai-rich-btn" style="margin-top:0.3rem; display:inline-block;">Send an Inquiry &rarr;</a>
+          </div>
+        `);
         break;
     }
   }
 
-  cmdHelp() {
-    this.print(`
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">Available Commands</span></div>
-        <table class="term-table">
-          <tr><td>about</td><td>Background, academic pedigree & engineering philosophy</td></tr>
-          <tr><td>skills</td><td>Categorized breakdown of AI, Full-Stack & IoT capabilities</td></tr>
-          <tr><td>projects</td><td>View selected projects with interactive triggers</td></tr>
-          <tr><td>open &lt;1-4&gt;</td><td>Launch dedicated case study modal directly (e.g. 'open 2')</td></tr>
-          <tr><td>contact</td><td>Email, LinkedIn & GitHub profiles with one-click copy</td></tr>
-          <tr><td>resume</td><td>View / download latest professional CV</td></tr>
-          <tr><td>blast</td><td>Trigger Neural Singularity particle explosion on canvas</td></tr>
-          <tr><td>matrix</td><td>Launch streaming Matrix digital code sequence</td></tr>
-          <tr><td>hire</td><td>Query recruiter availability & roles of interest</td></tr>
-          <tr><td>clear</td><td>Clear console display</td></tr>
-          <tr><td>exit</td><td>Close terminal session</td></tr>
-        </table>
-      </div>
-    `);
-  }
+  handleUserMessage(text) {
+    this.appendUserBubble(text);
+    const lower = text.toLowerCase();
 
-  cmdAbout() {
-    this.print(`
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">Sasmitha Nimesh</span> &bull; AI Engineer &amp; Full-Stack Developer</div>
-        <p style="margin-top:0.4rem; color:#cbd5e1;">
-          Undergraduate pursuing <strong>BSc (Hons) in Computer Science with Artificial Intelligence</strong>.
-          Passionate about bridging machine learning intelligence with production-grade web systems and autonomous microcontrollers.
-        </p>
-        <p style="margin-top:0.4rem; color: var(--text-muted);">
-          &bull; <strong>Specialties:</strong> Neural networks, predictive analytics (R/Python), full-stack web architectures, ESP32 IoT telemetry.<br>
-          &bull; <strong>Location:</strong> Sri Lanka &bull; Available for Global Remote Collaborations.
-        </p>
-      </div>
-    `);
-  }
-
-  cmdSkills() {
-    this.print(`
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">01. Artificial Intelligence &amp; Data Science</span></div>
-        <p style="color:#cbd5e1; margin-top:0.25rem;">
-          <span class="term-tag-emerald">Languages &amp; Frameworks:</span> Python, R Studio, ProLog, PyTorch/ML, Computer Vision, NLP.<br>
-          <span class="term-tag-emerald">Focus:</span> Exploratory data analysis, statistical inference, supervised/unsupervised modeling, predictive metrics.
-        </p>
-      </div>
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">02. Engineering &amp; Full-Stack Web</span></div>
-        <p style="color:#cbd5e1; margin-top:0.25rem;">
-          <span class="term-tag-emerald">Languages &amp; Frameworks:</span> Java (OOP), JavaScript (ES6+), React.js, Node.js, HTML5 &amp; CSS3.<br>
-          <span class="term-tag-emerald">Databases &amp; Tooling:</span> MongoDB, MySQL / SQL, Git, GitHub Actions CI/CD.
-        </p>
-      </div>
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">03. Robotics, IoT &amp; Embedded Systems</span></div>
-        <p style="color:#cbd5e1; margin-top:0.25rem;">
-          <span class="term-tag-emerald">Hardware &amp; Cloud:</span> ESP32 Microcontrollers, RFID Systems, Weight Calibration, Firebase Cloud, Telegram Bot API.
-        </p>
-      </div>
-    `);
-  }
-
-  cmdProjects() {
-    this.print(`
-      <div class="term-card">
-        <div class="term-card-title">
-          <span>Selected Projects Index</span>
-          <span class="term-tag-muted">Click or type 'open &lt;1-4&gt;'</span>
-        </div>
-        <div style="margin-top:0.6rem; display:flex; flex-direction:column; gap:0.5rem;">
-          <div>
-            <strong>[1] Student Performance Analysis</strong> &bull; <span class="term-tag-cyan">AI & Data Science</span>
-            <button class="term-btn-action" data-term-action="open-project" data-term-val="student-performance">View Case Study</button>
-            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.15rem;">R Language &bull; ggplot2 &bull; Statistical Hypothesis Testing</div>
-          </div>
-          <div>
-            <strong>[2] Smart Shopping Buddy</strong> &bull; <span class="term-tag-cyan">Robotics & IoT</span>
-            <button class="term-btn-action" data-term-action="open-project" data-term-val="smart-shopping-cart">View Case Study</button>
-            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.15rem;">ESP32 &bull; RFID Scanning &bull; Weight Verification &bull; Firebase &bull; Telegram</div>
-          </div>
-          <div>
-            <strong>[3] AgroVision Farm Management</strong> &bull; <span class="term-tag-cyan">Smart Agriculture</span>
-            <button class="term-btn-action" data-term-action="open-project" data-term-val="agrovision">View Case Study</button>
-            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.15rem;">Java OOP &bull; Swing GUI &bull; Automated Irrigation Schedule</div>
-          </div>
-          <div>
-            <strong>[4] Connect Lanka Tourism</strong> &bull; <span class="term-tag-cyan">Full-Stack Web</span>
-            <button class="term-btn-action" data-term-action="open-project" data-term-val="connect-lanka">View Case Study</button>
-            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.15rem;">JavaScript &bull; MongoDB &bull; MySQL &bull; Responsive UI Platform</div>
-          </div>
-        </div>
-      </div>
-    `);
-  }
-
-  cmdOpenProject(arg) {
-    const map = {
-      '1': 'student-performance',
-      'student': 'student-performance',
-      'student-performance': 'student-performance',
-      '2': 'smart-shopping-cart',
-      'shopping': 'smart-shopping-cart',
-      'smart-shopping-cart': 'smart-shopping-cart',
-      'robot': 'smart-shopping-cart',
-      '3': 'agrovision',
-      'agro': 'agrovision',
-      'agrovision': 'agrovision',
-      'farm': 'agrovision',
-      '4': 'connect-lanka',
-      'connect': 'connect-lanka',
-      'connect-lanka': 'connect-lanka',
-      'tourism': 'connect-lanka'
-    };
-
-    const targetKey = map[arg.trim().toLowerCase()];
-    if (targetKey && this.app?.openCaseStudy) {
-      this.print(`<div class="term-line"><span class="term-tag-emerald">✓</span> Launching case study for <strong>${targetKey}</strong>...</div>`);
-      this.app.openCaseStudy(targetKey);
-    } else {
-      this.print(`<div class="term-line"><span class="term-tag-magenta">Error:</span> Invalid project identifier. Use <span class="term-tag-cyan">'open 1'</span>, <span class="term-tag-cyan">'open 2'</span>, <span class="term-tag-cyan">'open 3'</span>, or <span class="term-tag-cyan">'open 4'</span>.</div>`);
-    }
-  }
-
-  cmdContact() {
-    this.print(`
-      <div class="term-card">
-        <div class="term-card-title"><span class="term-tag-cyan">Contact &amp; Connect</span></div>
-        <div style="margin-top:0.5rem; display:flex; flex-direction:column; gap:0.4rem;">
-          <div>
-            <span class="term-tag-emerald">Email:</span> rmsasmithanimesh@gmail.com
-            <button class="term-btn-action" data-term-action="copy-email" data-term-val="rmsasmithanimesh@gmail.com">Copy Email</button>
-          </div>
-          <div>
-            <span class="term-tag-emerald">LinkedIn:</span>
-            <a href="https://www.linkedin.com/in/sasmitha-nimesh-rathnayaka/" target="_blank" rel="noopener noreferrer" style="color:#38bdf8; text-decoration:underline;">linkedin.com/in/sasmitha-nimesh-rathnayaka</a>
-          </div>
-          <div>
-            <span class="term-tag-emerald">GitHub:</span>
-            <a href="https://github.com/SasmithaNimesh" target="_blank" rel="noopener noreferrer" style="color:#38bdf8; text-decoration:underline;">github.com/SasmithaNimesh</a>
-          </div>
-        </div>
-      </div>
-    `);
-  }
-
-  cmdResume() {
-    this.print(`<div class="term-line"><span class="term-tag-emerald">✓</span> Opening resume (PDF) in new tab...</div>`);
-    window.open('assets/resume.pdf', '_blank');
-  }
-
-  cmdBlast() {
-    this.print(`<div class="term-line"><span class="term-tag-cyan">⚡ Unleashing Neural Singularity &amp; Mathematical Logic Blast!</span></div>`);
-    if (this.app?.annBg) {
-      const x = window.innerWidth / 2;
-      const y = window.innerHeight / 2;
-      this.app.annBg.triggerNeuralBlast(x, y);
-    }
-  }
-
-  cmdMatrix() {
-    if (this.matrixInterval) {
-      clearInterval(this.matrixInterval);
-      this.matrixInterval = null;
+    // Natural Language Matching Engine
+    if (lower.includes('project') || lower.includes('work') || lower.includes('portfolio')) {
+      this.handleAction('projects');
+      return;
     }
 
-    this.print(`<div class="term-line"><span class="term-tag-emerald">Initiating Matrix Digital Rain Protocol...</span> (Streaming 6s)</div>`);
-    const canvas = document.createElement('canvas');
-    canvas.className = 'term-matrix-canvas';
-    this.output.appendChild(canvas);
-    this.scrollToBottom();
+    if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('language') || lower.includes('python') || lower.includes('java')) {
+      this.handleAction('skills');
+      return;
+    }
 
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth || 500;
-    canvas.height = 180;
+    if (lower.includes('resume') || lower.includes('cv')) {
+      this.handleAction('resume');
+      return;
+    }
 
-    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテト';
-    const fontSize = 13;
-    const cols = Math.floor(canvas.width / fontSize);
-    const drops = Array(cols).fill(1);
+    if (lower.includes('contact') || lower.includes('email') || lower.includes('reach') || lower.includes('touch')) {
+      this.handleAction('contact');
+      return;
+    }
 
-    const drawMatrix = () => {
-      ctx.fillStyle = 'rgba(1, 8, 4, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#64ffda';
-      ctx.font = `${fontSize}px monospace`;
+    if (lower.includes('blast') || lower.includes('singularity') || lower.includes('particle') || lower.includes('effect')) {
+      this.handleAction('blast');
+      return;
+    }
 
-      for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+    if (lower.includes('hire') || lower.includes('job') || lower.includes('available') || lower.includes('work') || lower.includes('remote') || lower.includes('relocation')) {
+      this.handleAction('hire');
+      return;
+    }
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
+    if (lower.includes('degree') || lower.includes('education') || lower.includes('university') || lower.includes('college')) {
+      this.replyWithTyping(`
+        <p style="color:#ffffff; font-weight:700;">Academic Background</p>
+        <p style="font-size:0.86rem; color:var(--text-muted); margin-top:0.3rem;">
+          Sasmitha is currently pursuing a <strong>BSc (Hons) in Computer Science with Artificial Intelligence</strong>, specializing in predictive statistics, machine learning architectures, and scalable software design.
+        </p>
+      `);
+      return;
+    }
 
-    this.matrixInterval = setInterval(drawMatrix, 40);
+    if (lower.includes('iot') || lower.includes('robot') || lower.includes('esp32') || lower.includes('shopping')) {
+      this.replyWithTyping(`
+        <p style="color:#ffffff; font-weight:700;">IoT &amp; Robotics Specialization</p>
+        <p style="font-size:0.86rem; color:var(--text-muted); margin-top:0.3rem;">
+          Sasmitha engineered the <strong>Smart Shopping Buddy</strong>: an autonomous ESP32 IoT shopping cart equipped with RFID scanning, load cell weight anti-theft verification, Firebase telemetry, and automated Telegram digital invoices!
+        </p>
+        <button class="ai-rich-btn" data-ai-action="open-study" data-ai-val="smart-shopping-cart" style="margin-top:0.5rem;">View Smart Shopping Case Study &rarr;</button>
+      `);
+      return;
+    }
 
+    if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey')) {
+      this.replyWithTyping(`
+        <p>Hello! 👋 I'm here to answer any questions about Sasmitha's AI engineering, web projects, or professional background. Feel free to ask anything or choose one of the quick options!</p>
+      `);
+      return;
+    }
+
+    // Fallback response with suggested options
+    this.replyWithTyping(`
+      <p style="color:#ffffff;">Thanks for asking! I'm trained on Sasmitha's portfolio and projects.</p>
+      <p style="font-size:0.84rem; color:var(--text-muted); margin-top:0.3rem;">
+        You can ask about his <strong>AI models</strong>, <strong>full-stack web development</strong>, <strong>IoT systems</strong>, or click one of the quick action buttons:
+      </p>
+      <div style="margin-top:0.5rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
+        <button class="ai-rich-btn" onclick="window.portfolioApp.aiAssistant.handleAction('projects')">Explore Projects</button>
+        <button class="ai-rich-btn" onclick="window.portfolioApp.aiAssistant.handleAction('skills')">View Skills</button>
+        <button class="ai-rich-btn" onclick="window.portfolioApp.aiAssistant.handleAction('contact')">Contact</button>
+      </div>
+    `);
+  }
+
+  replyWithTyping(htmlContent) {
+    const indicator = this.showTypingIndicator();
     setTimeout(() => {
-      if (this.matrixInterval) {
-        clearInterval(this.matrixInterval);
-        this.matrixInterval = null;
-        this.print(`<div class="term-line"><span class="term-tag-emerald">✓ Matrix stream complete. Neural parity verified.</span></div>`);
-      }
-    }, 6000);
-  }
-
-  cmdHire() {
-    this.print(`
-      <div class="term-card" style="border-left-color: #64ffda;">
-        <div class="term-card-title"><span class="term-tag-emerald">Status: Open for Engineering Opportunities</span></div>
-        <p style="margin-top:0.4rem; color:#cbd5e1;">
-          Sasmitha is currently open to <strong>AI Engineering, Machine Learning Developer, and Full-Stack Software</strong> roles.
-        </p>
-        <p style="margin-top:0.3rem; color:var(--text-muted);">
-          &bull; <strong>Work Preference:</strong> Remote, Hybrid, or Global Relocation.<br>
-          &bull; <strong>Immediate Step:</strong> Send an inquiry directly to <a href="mailto:rmsasmithanimesh@gmail.com" style="color:#38bdf8; text-decoration:underline;">rmsasmithanimesh@gmail.com</a>.
-        </p>
-      </div>
-    `);
-  }
-
-  cmdClear() {
-    if (this.output) {
-      this.output.innerHTML = '';
-      this.printWelcome();
-    }
-  }
-
-  handleNaturalLanguageQuery(lower, raw) {
-    if (lower.includes('degree') || lower.includes('education') || lower.includes('university') || lower.includes('study')) {
-      this.print(`<div class="term-line"><strong>Education:</strong> Sasmitha is pursuing a <strong>BSc (Hons) Computer Science with Artificial Intelligence</strong>, specializing in machine learning algorithms, statistical data analysis, and software engineering.</div>`);
-      return;
-    }
-
-    if (lower.includes('remote') || lower.includes('location') || lower.includes('country') || lower.includes('where')) {
-      this.print(`<div class="term-line"><strong>Location &amp; Remote:</strong> Based in <strong>Sri Lanka</strong>, available for global remote roles across US, EU, and APAC timezones.</div>`);
-      return;
-    }
-
-    if (lower.includes('python') || lower.includes('ai') || lower.includes('model') || lower.includes('machine learning')) {
-      this.print(`<div class="term-line"><strong>AI Capabilities:</strong> Sasmitha builds supervised/unsupervised machine learning pipelines in <strong>Python</strong> and <strong>R</strong>, working with neural networks, exploratory analytics, computer vision, and NLP.</div>`);
-      return;
-    }
-
-    if (lower.includes('iot') || lower.includes('esp32') || lower.includes('hardware') || lower.includes('robot')) {
-      this.print(`<div class="term-line"><strong>IoT &amp; Robotics:</strong> Experienced with ESP32 microcontrollers, RFID reader arrays, load cell sensor calibration, cloud sync via Firebase, and automated Telegram Bot APIs. Check out <span class="term-tag-cyan">'open 2'</span> for the Smart Shopping Buddy case study!</div>`);
-      return;
-    }
-
-    if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-      this.print(`<div class="term-line">Greetings! I am Sasmitha's AI portfolio agent. You can inspect my <span class="term-tag-cyan">'skills'</span>, explore <span class="term-tag-cyan">'projects'</span>, or type <span class="term-tag-cyan">'blast'</span> for canvas fireworks!</div>`);
-      return;
-    }
-
-    // Default fallback
-    this.print(`
-      <div class="term-line">
-        <span class="term-tag-yellow">Command not recognized:</span> "${this.escapeHtml(raw)}"<br>
-        <span class="term-tag-muted">Type <span class="term-tag-cyan">'help'</span> to see available commands or ask questions like <span class="term-tag-emerald">'What is your degree?'</span> or <span class="term-tag-emerald">'Do you work remotely?'</span>.</span>
-      </div>
-    `);
+      indicator.remove();
+      this.appendBotBubble(htmlContent);
+    }, 400);
   }
 
   escapeHtml(str) {
@@ -1678,4 +1529,5 @@ class InteractiveTerminal {
 document.addEventListener('DOMContentLoaded', () => {
   window.portfolioApp = new PortfolioApp();
 });
+
 

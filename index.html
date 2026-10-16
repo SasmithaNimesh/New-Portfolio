@@ -45,10 +45,6 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="nav-terminal-trigger" id="nav-terminal-btn" aria-label="Open Interactive AI Console" title="Press ` or Ctrl+K to open AI Terminal">
-          <span>&gt;_</span> Console
-        </button>
-
         <a href="#contact" class="nav-contact-btn link-draw">
           Get in Touch &rarr;
         </a>
@@ -506,67 +502,123 @@
     </div>
   </div>
 
-  <!-- Floating Interactive AI & Dev Terminal Launcher -->
-  <aside class="terminal-launcher-wrap" aria-label="Terminal Console Launcher">
-    <button class="terminal-launcher-btn" id="terminal-launcher-btn" aria-haspopup="dialog" aria-expanded="false" title="Open AI Terminal (Shortcut: ` or Ctrl+K)">
-      <span class="terminal-launcher-pulse" aria-hidden="true"></span>
-      <span class="terminal-launcher-icon" aria-hidden="true">&gt;_</span>
-      <span class="terminal-launcher-label">AI Console</span>
-      <span class="terminal-launcher-kbd" aria-hidden="true">`</span>
+  <!-- Floating AI Assistant Launcher FAB -->
+  <aside class="ai-widget-launcher" aria-label="AI Assistant Launcher">
+    <button class="ai-fab-btn" id="ai-fab-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="ai-assistant-popup" title="Open Sasmitha AI Assistant">
+      <span class="ai-fab-pulse" aria-hidden="true"></span>
+      <div class="ai-fab-avatar">
+        <span class="ai-fab-symbol">S</span>
+        <span class="ai-fab-beacon"></span>
+      </div>
+      <div class="ai-fab-info">
+        <span class="ai-fab-title">AI Assistant</span>
+        <span class="ai-fab-sub">Ask or Explore ✦</span>
+      </div>
     </button>
   </aside>
 
-  <!-- Interactive AI Developer Terminal Modal -->
-  <div class="ai-terminal-backdrop" id="ai-terminal-modal" role="dialog" aria-modal="true" aria-labelledby="terminal-title" aria-hidden="true">
-    <div class="ai-terminal-window">
-      <!-- Terminal Header -->
-      <div class="terminal-header">
-        <div class="terminal-controls">
-          <button class="term-btn term-close" id="term-close-btn" aria-label="Close Terminal" title="Close (Esc)"></button>
-          <button class="term-btn term-minimize" id="term-min-btn" aria-label="Minimize Terminal" title="Minimize"></button>
-          <button class="term-btn term-maximize" id="term-max-btn" aria-label="Maximize Terminal" title="Toggle Fullscreen"></button>
+  <!-- Floating AI Assistant Options & Chat Popup -->
+  <section class="ai-assistant-popup" id="ai-assistant-popup" role="dialog" aria-modal="false" aria-labelledby="ai-popup-title" aria-hidden="true">
+    <!-- Popup Header -->
+    <div class="ai-popup-header">
+      <div class="ai-popup-brand">
+        <div class="ai-popup-avatar">
+          <span>S</span>
+          <span class="ai-popup-dot"></span>
         </div>
-        <div class="terminal-title" id="terminal-title">
-          <span class="term-title-icon">⚡</span>
-          <span>sasmitha@neural-core:~$ (Interactive AI Console)</span>
-        </div>
-        <div class="terminal-badge">
-          <span class="term-status-dot"></span>
-          <span>v2.5 • ONLINE</span>
+        <div>
+          <h3 class="ai-popup-title" id="ai-popup-title">Sasmitha AI</h3>
+          <span class="ai-popup-tag">Neural Core &bull; Available</span>
         </div>
       </div>
-
-      <!-- Quick Action Chips for Fast Command Insertion -->
-      <div class="terminal-quick-chips" aria-label="Quick Commands">
-        <span class="quick-chip-label">Quick:</span>
-        <button class="term-chip" data-cmd="help">help</button>
-        <button class="term-chip" data-cmd="about">about</button>
-        <button class="term-chip" data-cmd="skills">skills</button>
-        <button class="term-chip" data-cmd="projects">projects</button>
-        <button class="term-chip" data-cmd="contact">contact</button>
-        <button class="term-chip" data-cmd="blast">blast</button>
-        <button class="term-chip" data-cmd="matrix">matrix</button>
-        <button class="term-chip" data-cmd="hire">hire</button>
-        <button class="term-chip" data-cmd="clear">clear</button>
+      <div class="ai-popup-actions">
+        <button class="ai-popup-btn ai-btn-reset" id="ai-reset-btn" title="Reset Conversation" aria-label="Reset Conversation">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <button class="ai-popup-btn ai-btn-close" id="ai-close-btn" title="Close" aria-label="Close AI Assistant">✕</button>
       </div>
-
-      <!-- Terminal Output Scroll Area -->
-      <div class="terminal-body" id="terminal-output" tabindex="0" role="log" aria-live="polite">
-        <!-- Welcoming banner rendered via JS -->
-      </div>
-
-      <!-- Command Input Prompt -->
-      <form class="terminal-input-bar" id="terminal-form" autocomplete="off">
-        <label for="terminal-input" class="term-prompt">
-          <span class="prompt-user">guest</span><span class="prompt-at">@</span><span class="prompt-host">sasmitha.ai</span><span class="prompt-path">:~$</span>
-        </label>
-        <div class="term-input-wrapper">
-          <input type="text" id="terminal-input" class="term-input" placeholder="Type a command or ask a question (e.g. 'skills', 'about')..." autocomplete="off" spellcheck="false" />
-        </div>
-        <button type="submit" class="term-send-btn" aria-label="Run Command">Run ↵</button>
-      </form>
     </div>
-  </div>
+
+    <!-- Scrollable Chat Stream & Options Body -->
+    <div class="ai-popup-body" id="ai-messages-container" tabindex="0">
+      <!-- AI Welcome Card -->
+      <div class="ai-msg ai-msg-bot animate-fade">
+        <div class="ai-msg-bubble">
+          <p class="ai-msg-greeting">
+            Hello! 👋 I'm <strong>Sasmitha's AI Assistant</strong>.
+          </p>
+          <p class="ai-msg-intro">
+            Trained on Sasmitha's academic background, machine learning models, and engineering projects. Choose an option below or ask me anything!
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Interactive Options Grid -->
+      <div class="ai-options-section" id="ai-options-grid">
+        <div class="ai-options-label">Recommended Options</div>
+        <div class="ai-options-grid">
+          <button class="ai-opt-card" data-action="projects">
+            <span class="ai-opt-icon">🚀</span>
+            <div class="ai-opt-meta">
+              <strong>Explore Projects</strong>
+              <span>Case studies &amp; live demos</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="skills">
+            <span class="ai-opt-icon">⚡</span>
+            <div class="ai-opt-meta">
+              <strong>Technical Arsenal</strong>
+              <span>AI, Full-Stack &amp; IoT stack</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="resume">
+            <span class="ai-opt-icon">📄</span>
+            <div class="ai-opt-meta">
+              <strong>View Resume</strong>
+              <span>Download PDF directly</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="contact">
+            <span class="ai-opt-icon">📬</span>
+            <div class="ai-opt-meta">
+              <strong>Get in Touch</strong>
+              <span>Email &amp; verified profiles</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="blast">
+            <span class="ai-opt-icon">🌌</span>
+            <div class="ai-opt-meta">
+              <strong>Neural Singularity</strong>
+              <span>Trigger particle explosion</span>
+            </div>
+          </button>
+
+          <button class="ai-opt-card" data-action="hire">
+            <span class="ai-opt-icon">🤝</span>
+            <div class="ai-opt-meta">
+              <strong>Hire / Availability</strong>
+              <span>Global remote &amp; roles</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Bar -->
+    <form class="ai-popup-footer" id="ai-chat-form" autocomplete="off">
+      <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="Ask about AI, projects, experience..." autocomplete="off" />
+      <button type="submit" class="ai-chat-submit" aria-label="Send Message" title="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </section>
 
   <!-- Scripts -->
   <script src="js/main.js"></script>
