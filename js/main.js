@@ -7,27 +7,38 @@
 
 // Sasmitha's Real Projects Data
 const PROJECTS_DATA = {
-  'student-performance': {
-    title: 'Student Performance Analysis',
-    tag: 'AI & Data Science',
-    year: '2025',
-    client: 'Academic Research & Data Lab',
-    services: 'Exploratory Data Analysis, R Language, Statistical Modeling, Data Visualization',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
-    description: 'A research-heavy data analysis project identifying how digital resource engagement and study patterns directly impact academic achievement. Built using R, ggplot2, and statistical hypothesis testing.',
-    challenge: 'Isolating confounding demographic variables from actual digital learning engagement metrics across multivariate student datasets.',
-    solution: 'Designed an end-to-end data cleaning and exploratory analytics pipeline in R Studio, uncovering key engagement thresholds that correlate with a 24% increase in academic success.',
-    github: 'https://github.com/SasmithaNimesh/EDA-Student-Performance-Analysis-R',
-    linkedin: 'https://www.linkedin.com/posts/sasmitha-nimesh-rathnayaka_dataanalysis-rprogramming-statistics-activity-7428807290536984576-rElv'
+  'ai-news-app': {
+    title: 'AI Global News Summarizer',
+    tag: 'Generative AI & MERN',
+    year: '2026',
+    client: 'Full-Stack GenAI Showcase',
+    services: 'Google Gemini AI, React.js, Node.js, Express, MongoDB, REST API, TailwindCSS',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80',
+    description: 'A full-stack MERN news aggregator that leverages Google Gemini AI to distill breaking global news into 3-bullet point executive digests. Delivers lightning-fast headline intelligence with zero fluff.',
+    challenge: 'Structuring automated web scraping and prompt engineering for Google Gemini to generate consistent, deterministic 3-point summaries under tight API latency constraints.',
+    solution: 'Designed an asynchronous Node.js micro-pipeline with cache buffering in MongoDB and a responsive React interface, reducing reading time by 75% for current events.',
+    github: 'https://github.com/SasmithaNimesh/AI-News-App'
+  },
+  'country-segmentation': {
+    title: 'Humanitarian Fund Allocation Clustering',
+    tag: 'Machine Learning & Analytics',
+    year: '2026',
+    client: 'HELP International NGO',
+    services: 'Python, Unsupervised Learning, K-Means Clustering, PCA, Scikit-Learn, Seaborn',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
+    description: 'An unsupervised machine learning system built for HELP International, a global humanitarian NGO, to objectively prioritize a $10M humanitarian fund allocation across 167 nations using multi-dimensional socio-economic and health indicators.',
+    challenge: 'Handling multicollinear socio-economic variables (GDP per capita, child mortality, inflation, life expectancy) and avoiding clustering distortion caused by extreme national outliers.',
+    solution: 'Engineered Principal Component Analysis (PCA) to reduce dimensionality while preserving 95% variance, followed by robust K-Means clustering and silhouette score validation to accurately identify the highest-urgency countries.',
+    github: 'https://github.com/SasmithaNimesh/Country-Segmentation-with-K-Means'
   },
   'smart-shopping-cart': {
     title: 'Smart Shopping Buddy',
     tag: 'Robotics & IoT',
     year: '2025',
-    client: 'Retail Innovation Initiative',
-    services: 'ESP32 Microcontroller, RFID Sensors, Weight Calibration, Firebase Cloud, Telegram Bot API',
-    image: 'https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?auto=format&fit=crop&w=1600&q=80',
-    description: 'An autonomous IoT-based smart shopping cart powered by ESP32 that automates physical item scanning via RFID, cross-verifies weight in real-time to prevent theft, and streamlines checkout through Firebase cloud integration and automated Telegram digital receipts.',
+    client: 'Retail Automation Initiative',
+    services: 'ESP32 Microcontroller, RFID Sensors, HX711 Weight Sensing, Firebase Cloud, Telegram Bot API',
+    image: 'assets/Robot.jpeg',
+    description: 'An autonomous IoT-based smart shopping cart powered by ESP32 that automates physical item scanning via RFID, cross-verifies item weight in real-time to prevent theft, and streamlines checkout through Firebase cloud synchronization and instant Telegram digital receipts.',
     challenge: 'Preventing checkout fraud and sensor latency while maintaining sub-second scanning response in real-time supermarket conditions.',
     solution: 'Integrated high-precision load cell calibration with dual-verification RFID scanning, transmitting live encrypted telemetry directly to Firebase and pinging instant itemized Telegram invoices.',
     github: 'https://github.com/SasmithaNimesh/Smart-Shop-Buddy-IoT-Smart-Shopping-Cart',
@@ -38,13 +49,38 @@ const PROJECTS_DATA = {
     tag: 'Software & Smart Agriculture',
     year: '2024',
     client: 'Agritech Innovation Project',
-    services: 'Java OOP, Swing GUI Dashboard, Automated Sensor Emulation, Irrigation Scheduling',
+    services: 'Java OOP, Swing GUI Dashboard, Automated Sensor Emulation, Irrigation Scheduling, Observer Pattern',
     image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80',
-    description: 'A comprehensive Java-based desktop application designed for automated irrigation management and precision crop health monitoring. Built with robust Object-Oriented principles and an interactive management dashboard.',
-    challenge: 'Structuring modular multi-zone sensor polling and rule-based automated valve triggers without memory overhead.',
+    description: 'A comprehensive Java-based desktop application designed for automated irrigation management and precision crop health monitoring. Built with robust Object-Oriented principles and an interactive telemetry dashboard.',
+    challenge: 'Structuring modular multi-zone sensor polling and rule-based automated valve triggers without memory overhead or concurrency race conditions.',
     solution: 'Developed a decoupled Java architecture using Observer and Factory design patterns, enabling real-time soil moisture monitoring and smart water conservation schedules.',
     github: 'https://github.com/SasmithaNimesh/AgroVision-Farm-Management-System-Java',
     linkedin: 'https://www.linkedin.com/posts/sasmitha-nimesh-rathnayaka_java-oop-softwaredevelopment-activity-7428805794210631680-2TAQ'
+  },
+  'food-price-analysis': {
+    title: 'Sri Lanka Food Price Trend Analysis',
+    tag: 'Data Science & Forecasting',
+    year: '2026',
+    client: 'Economic Data Science Research',
+    services: 'Python, Pandas, NumPy, Matplotlib, Seaborn, Time-Series Analysis, Macroeconomic Modeling',
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1600&q=80',
+    description: 'An empirical data science investigation analyzing longitudinal food prices across Sri Lanka from 2007 to 2026. Models inflation cycles, supply-chain bottlenecks, and seasonal price volatility across essential commodities.',
+    challenge: 'Cleaning and aligning nearly two decades of irregular commodity price reporting across diverse regional markets and converting noise into actionable economic insights.',
+    solution: 'Constructed an end-to-end Python pipeline with rolling window statistics, seasonal decomposition, and visual heatmaps to map price volatility and macroeconomic shocks.',
+    github: 'https://github.com/SasmithaNimesh/sri-lanka-food-price-analysis'
+  },
+  'student-performance': {
+    title: 'Student Performance Analysis in R',
+    tag: 'Statistical Modeling & EDA',
+    year: '2024',
+    client: 'Academic Research Initiative',
+    services: 'R Language, ggplot2, Statistical Modeling, Hypothesis Testing, Multivariate Analysis',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
+    description: 'A research data analysis project identifying how digital resource engagement and study patterns directly impact academic achievement. Built using R, ggplot2, and rigorous statistical hypothesis testing.',
+    challenge: 'Isolating confounding demographic variables from actual digital learning engagement metrics across multivariate student datasets.',
+    solution: 'Designed an end-to-end data cleaning and exploratory analytics pipeline in R Studio, uncovering key engagement thresholds that correlate with a 24% increase in academic success.',
+    github: 'https://github.com/SasmithaNimesh/EDA-Student-Performance-Analysis-R',
+    linkedin: 'https://www.linkedin.com/posts/sasmitha-nimesh-rathnayaka_dataanalysis-rprogramming-statistics-activity-7428807290536984576-rElv'
   },
   'connect-lanka': {
     title: 'Connect Lanka Tourism',
@@ -52,7 +88,7 @@ const PROJECTS_DATA = {
     year: '2024',
     client: 'Sri Lanka Tourism Tech',
     services: 'Full-Stack Web Dev, JavaScript (ES6+), MongoDB, MySQL, UI/UX Design, REST APIs',
-    image: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1600&q=80',
+    image: 'assets/ConnectLanka.png',
     description: 'A responsive digital platform connecting international travelers with certified local guides and authentic cultural experiences across Sri Lanka. Features interactive itinerary planning and verified booking workflows.',
     challenge: 'Designing an accessible, mobile-first interface capable of handling dynamic booking queries and bilingual location catalogs.',
     solution: 'Engineered a modern web platform with responsive CSS architecture, optimized asset loading, and flexible NoSQL/SQL data schemas.',
@@ -715,6 +751,8 @@ class PortfolioApp {
     this.initCaseStudies();
     this.initMobileMenu();
     this.initThoughts();
+    this.initContactActions();
+    this.initTedAssistant();
   }
 
   initANNBackground() {
@@ -1077,10 +1115,566 @@ class PortfolioApp {
       }
     });
   }
+
+  // Direct Contact & Email Clipboard Copy
+  initContactActions() {
+    const copyBtn = document.getElementById('copy-email-btn');
+    const tooltip = document.getElementById('copy-tooltip');
+    if (!copyBtn) return;
+
+    copyBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const email = 'rmsasmithanimesh@gmail.com';
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(email);
+        } else {
+          const textArea = document.createElement('textarea');
+          textArea.value = email;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-9999px';
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+        }
+
+        copyBtn.classList.add('copied');
+        if (tooltip) tooltip.textContent = 'Copied! ✓';
+
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          if (tooltip) tooltip.textContent = 'Copy';
+        }, 2200);
+      } catch (err) {
+        console.warn('Failed to copy email:', err);
+      }
+    });
+  }
+
+  // Ted AI Assistant
+  initTedAssistant() {
+    this.tedAssistant = new TedAIAssistant(this);
+  }
+}
+
+/**
+ * Ted AI Assistant (Reference Image 1: Mobile UI)
+ * Floating corner widget & popup dialog matching "Meet Ted! Your AI Assistant"
+ * Features:
+ * - Quick action cards: Start Chat, Projects, Architecture, Resume, Neural Blast, Contact
+ * - Real-time conversational intelligence about Sasmitha's projects, skills, education, and architecture
+ * - Web Speech API Voice synthesis & SpeechRecognition with concentric ripple pulse animations
+ * - Seamless integration with PortfolioApp (Case study modals, Neural singularity blast, scroll triggers)
+ */
+class TedAIAssistant {
+  constructor(app) {
+    this.app = app;
+    this.fabBtn = document.getElementById('ted-fab-btn');
+    this.modal = document.getElementById('ted-assistant-modal');
+    this.closeBtn = document.getElementById('ted-close-btn');
+    this.actionCards = document.querySelectorAll('.ted-action-card[data-ted-action]');
+    this.chatStream = document.getElementById('ted-chat-stream');
+    this.inputForm = document.getElementById('ted-input-form');
+    this.textInput = document.getElementById('ted-text-input');
+    this.voiceBtn = document.getElementById('ted-voice-btn');
+    this.resetBtn = document.getElementById('ted-reset-chat-btn');
+    this.keyboardBtn = document.getElementById('ted-toggle-keyboard');
+    this.contentScroll = document.getElementById('ted-content-scroll');
+
+    this.isOpen = false;
+    this.isListening = false;
+    this.recognition = null;
+    this.messages = [];
+
+    this.initSpeech();
+    this.bindEvents();
+  }
+
+  initSpeech() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      try {
+        this.recognition = new SpeechRecognition();
+        this.recognition.continuous = false;
+        this.recognition.interimResults = false;
+        this.recognition.lang = 'en-US';
+
+        this.recognition.onstart = () => {
+          this.setListeningState(true);
+        };
+
+        this.recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          if (transcript) {
+            if (this.textInput) this.textInput.value = transcript;
+            this.handleUserMessage(transcript);
+          }
+        };
+
+        this.recognition.onerror = () => {
+          this.setListeningState(false);
+        };
+
+        this.recognition.onend = () => {
+          this.setListeningState(false);
+        };
+      } catch (err) {
+        console.warn('SpeechRecognition initialization error:', err);
+      }
+    }
+  }
+
+  bindEvents() {
+    if (this.fabBtn) {
+      this.fabBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.toggle();
+      });
+    }
+
+    // Header & Mobile Nav AI Assistant Triggers
+    const navTedBtn = document.getElementById('nav-ted-trigger-btn');
+    if (navTedBtn) {
+      navTedBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.open();
+      });
+    }
+
+    const navTedLink = document.getElementById('nav-ted-navlink');
+    if (navTedLink) {
+      navTedLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const mobileNav = document.querySelector('.nav-links');
+        if (mobileNav && mobileNav.classList.contains('mobile-open')) {
+          mobileNav.classList.remove('mobile-open');
+        }
+        this.open();
+      });
+    }
+
+    if (this.closeBtn) {
+      this.closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.close();
+      });
+    }
+
+    if (this.modal) {
+      this.modal.addEventListener('click', (e) => {
+        if (e.target === this.modal) {
+          this.close();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isOpen) {
+        this.close();
+      }
+    });
+
+    // Action Cards
+    this.actionCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const action = card.getAttribute('data-ted-action');
+        this.handleAction(action);
+      });
+    });
+
+    // Text Input Form
+    if (this.inputForm) {
+      this.inputForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = this.textInput.value.trim();
+        if (query) {
+          this.handleUserMessage(query);
+          this.textInput.value = '';
+        }
+      });
+    }
+
+    // Voice / Mic Button
+    if (this.voiceBtn) {
+      this.voiceBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.toggleVoice();
+      });
+    }
+
+    // Reset Chat
+    if (this.resetBtn) {
+      this.resetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.resetChat();
+      });
+    }
+
+    // Toggle Keyboard Focus
+    if (this.keyboardBtn) {
+      this.keyboardBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (this.textInput) {
+          this.textInput.focus();
+        }
+      });
+    }
+  }
+
+  toggle() {
+    if (this.isOpen) {
+      this.close();
+    } else {
+      this.open();
+    }
+  }
+
+  open() {
+    if (!this.modal) return;
+    this.isOpen = true;
+    this.modal.classList.add('active');
+    this.modal.setAttribute('aria-hidden', 'false');
+    if (this.fabBtn) this.fabBtn.setAttribute('aria-expanded', 'true');
+
+    if (this.messages.length === 0) {
+      this.addBotMessage(
+        "👋 **Meet Ted!** I'm Sasmitha's personal AI Assistant. How can I help you today? Ask about his AI models, IoT projects, software architecture, or tap any card above!"
+      );
+    }
+
+    if (this.textInput) {
+      setTimeout(() => this.textInput.focus(), 300);
+    }
+  }
+
+  close() {
+    if (!this.modal) return;
+    this.isOpen = false;
+    this.modal.classList.remove('active');
+    this.modal.setAttribute('aria-hidden', 'true');
+    if (this.fabBtn) this.fabBtn.setAttribute('aria-expanded', 'false');
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.setListeningState(false);
+  }
+
+  setListeningState(listening) {
+    this.isListening = listening;
+    if (this.voiceBtn) {
+      if (listening) {
+        this.voiceBtn.classList.add('listening');
+      } else {
+        this.voiceBtn.classList.remove('listening');
+      }
+    }
+  }
+
+  toggleVoice() {
+    if (this.recognition) {
+      if (this.isListening) {
+        this.recognition.stop();
+        this.setListeningState(false);
+      } else {
+        try {
+          this.recognition.start();
+        } catch (err) {
+          console.warn('Speech recognition start failed:', err);
+          this.setListeningState(false);
+        }
+      }
+    } else {
+      // Fallback voice pulse & simulation if browser doesn't permit mic
+      this.setListeningState(true);
+      this.speak("Hi! Voice input is simulated on your browser. What would you like to know about Sasmitha?");
+      setTimeout(() => {
+        this.setListeningState(false);
+      }, 3500);
+    }
+  }
+
+  speak(text) {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      // Strip markdown asterisks and links for clean speech
+      const cleanText = text.replace(/[*#_`]/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = 1.05;
+      utterance.pitch = 1.05;
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn('SpeechSynthesis error:', e);
+    }
+  }
+
+  handleAction(action) {
+    switch (action) {
+      case 'chat':
+        if (this.textInput) {
+          this.textInput.focus();
+          this.addBotMessage("Ask me anything! For example:\n• *What AI tools does Sasmitha use?*\n• *Tell me about his IoT Shopping Cart*\n• *Explain his Software Architecture skills*");
+        }
+        break;
+
+      case 'projects':
+        this.addBotMessage(
+          "Here are Sasmitha's flagship engineering projects:\n" +
+          "1. **AI Global News Summarizer** (Google Gemini AI & MERN)\n" +
+          "2. **Humanitarian Fund Allocation Clustering** (HELP International, PCA & K-Means)\n" +
+          "3. **Smart Shopping Buddy** (ESP32 IoT, RFID, Weight Sensing, Telegram)\n" +
+          "4. **AgroVision Smart Farming** (Java OOP & Automated Irrigation)\n" +
+          "5. **Sri Lanka Food Price Analysis** (Python Data Science & Time-Series)\n" +
+          "6. **Student Performance Analysis** (R Language & Statistical Modeling)\n\n" +
+          "Which one would you like me to open?"
+        );
+        break;
+
+      case 'arch':
+        this.close();
+        const archEl = document.getElementById('skills');
+        if (archEl) {
+          archEl.scrollIntoView({ behavior: 'smooth' });
+          const serviceItem = archEl.querySelectorAll('.service-item')[3];
+          if (serviceItem) {
+            serviceItem.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+            serviceItem.style.borderColor = '#38bdf8';
+            serviceItem.style.boxShadow = '0 0 30px rgba(56, 189, 248, 0.4)';
+            setTimeout(() => {
+              serviceItem.style.borderColor = '';
+              serviceItem.style.boxShadow = '';
+            }, 3000);
+          }
+        }
+        this.speak("Navigating to Software and Cloud Architecture: Monolithic, Microservices, Serverless, and Hybrid Cloud Solutions.");
+        break;
+
+      case 'resume':
+        window.open('assets/resume.pdf', '_blank', 'noopener,noreferrer');
+        this.addBotMessage("📄 Opened Sasmitha's verified CV (PDF) in a new tab!");
+        break;
+
+      case 'blast':
+        if (this.app && this.app.annBg) {
+          this.app.annBg.triggerNeuralBlast(window.innerWidth / 2, window.innerHeight / 2);
+          this.addBotMessage("⚡ **Neural Singularity Detonated!** Watch the mathematical manifold and synaptic explosion on the canvas!");
+          this.speak("Neural singularity detonated!");
+        }
+        break;
+
+      case 'contact':
+        this.close();
+        const contactEl = document.getElementById('contact');
+        if (contactEl) {
+          contactEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  handleUserMessage(text) {
+    this.addUserMessage(text);
+    this.showTypingIndicator();
+
+    setTimeout(() => {
+      this.hideTypingIndicator();
+      const reply = this.generateResponse(text);
+      this.addBotMessage(reply);
+      this.speak(reply);
+    }, 450);
+  }
+
+  generateResponse(query) {
+    const q = query.toLowerCase();
+
+    // AI News App / Gemini
+    if (q.includes('news') || q.includes('gemini') || q.includes('summariz') || q.includes('ai-news') || q.includes('mern')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('ai-news-app'), 1200);
+      }
+      return "📰 **AI Global News Summarizer** is a MERN web application powered by **Google Gemini AI** that synthesizes global news headlines into real-time, 3-bullet point executive briefs. Opening the case study!";
+    }
+
+    // Country Segmentation / HELP International / K-Means / Clustering
+    if (q.includes('country') || q.includes('segmentation') || q.includes('cluster') || q.includes('k-means') || q.includes('kmeans') || q.includes('help international') || q.includes('ngo')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('country-segmentation'), 1200);
+      }
+      return "🌍 **Humanitarian Fund Allocation Clustering** is an unsupervised ML project using PCA and K-Means clustering for HELP International NGO to objectively prioritize $10M humanitarian aid across 167 nations. Opening the case study!";
+    }
+
+    // Project: Smart Shopping Buddy
+    if (q.includes('shopping') || q.includes('cart') || q.includes('esp32') || q.includes('rfid') || q.includes('buddy')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('smart-shopping-cart'), 1200);
+      }
+      return "🛒 **Smart Shopping Buddy** is an autonomous IoT cart powered by ESP32, RFID tag verification, HX711 weight calibration to prevent supermarket theft, Firebase cloud sync, and instant Telegram Bot digital receipts! Opening its case study now.";
+    }
+
+    // Project: Agrovision
+    if (q.includes('agro') || q.includes('farming') || q.includes('agriculture') || q.includes('irrigation') || q.includes('java')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('agrovision'), 1200);
+      }
+      return "🌱 **AgroVision Smart Farming** is a Java OOP desktop system implementing Observer and Factory design patterns for precision multi-zone irrigation and real-time crop soil moisture management. Opening the case study!";
+    }
+
+    // Food Price Analysis
+    if (q.includes('food') || q.includes('price') || q.includes('sri lanka') || q.includes('inflation') || q.includes('time-series') || q.includes('timeseries')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('food-price-analysis'), 1200);
+      }
+      return "📈 **Sri Lanka Food Price Trend Analysis** is an empirical data science study analyzing commodity price volatility and macroeconomic inflation cycles from 2007 to 2026 using Python, Pandas, and time-series modeling. Opening the case study!";
+    }
+
+    // Project: Student Performance / R / EDA
+    if (q.includes('student') || q.includes('performance') || q.includes(' r ') || q.endsWith(' r') || q.includes('eda') || q.includes('academic')) {
+      if (this.app && this.app.openCaseStudy) {
+        setTimeout(() => this.app.openCaseStudy('student-performance'), 1200);
+      }
+      return "📊 **Student Performance Analysis** is a research data science project in R Studio using ggplot2 and statistical hypothesis testing. It identified key engagement thresholds leading to a 24% boost in academic success. Opening the case study!";
+    }
+
+    // Research / Paper
+    if (q.includes('research') || q.includes('paper') || q.includes('publication') || q.includes('onion') || q.includes('robotics')) {
+      return "🔬 **Ongoing Academic Research:**\n\n" +
+        "**Title:** *'Investigating the Impact of AI with Automation in Robotics'*\n" +
+        "**Focus:** Investigating deep learning control models, computer vision sensor fusion, and automated adaptive feedback loops in physical robotics using the formal Research Onion Methodology.";
+    }
+
+    // Roles / Experience / Sasnaka Sansada
+    if (q.includes('role') || q.includes('experience') || q.includes('sasnaka') || q.includes('leader') || q.includes('coordinator')) {
+      return "🏆 **Roles & Leadership Trajectory:**\n\n" +
+        "• **BSc (Hons) in Computer Science with AI** — Graduated with **First Class Honours**.\n" +
+        "• **Lead Student Researcher** — Investigating AI with Automation in Robotics.\n" +
+        "• **District Coordinator (Polonnaruwa)** — **Sasnaka Sansada** Volunteering Organization (Leading regional educational outreach & youth empowerment).\n" +
+        "• **Open Source AI & IoT Developer** — 10+ public engineering repositories on GitHub.";
+    }
+
+    // Degree / Education / University
+    if (q.includes('degree') || q.includes('education') || q.includes('graduat') || q.includes('first class') || q.includes('gpa')) {
+      return "🎓 **Education & Academic Distinction:**\n\n" +
+        "Sasmitha holds a **BSc (Hons) in Computer Science with Artificial Intelligence**, graduating with **First Class Honours**. He specialized in Robotics, Machine Learning, and Intelligent Autonomous Systems.";
+    }
+
+    // Architecture
+    if (q.includes('architecture') || q.includes('monolith') || q.includes('microservice') || q.includes('serverless') || q.includes('hybrid') || q.includes('cloud')) {
+      return "🏗️ **Software & Cloud Architecture:**\n\n" +
+        "• **Monolithic Architecture:** Traditional, single-unit applications engineered for unified domain consistency & optimized performance.\n" +
+        "• **Microservices Architecture:** Decoupled services for elastic scalability, isolated fault domains, and deployment flexibility.\n" +
+        "• **Serverless Architecture:** Event-driven, auto-scaling computational routines with zero infrastructure management overhead.\n" +
+        "• **Hybrid Cloud Solutions:** High-performance integration bridging on-premises hardware telemetry with secure cloud workloads.";
+    }
+
+    // Skills / Tech stack
+    if (q.includes('skill') || q.includes('stack') || q.includes('tech') || q.includes('language') || q.includes('framework')) {
+      return "⚡ **Sasmitha's Technical Stack:**\n\n" +
+        "• **Languages:** Python, C++, Java, JavaScript (ES6+), R, PHP, SQL, HTML5/CSS3\n" +
+        "• **AI & Data Science:** Scikit-Learn, Google Gemini API, Pandas, NumPy, K-Means, PCA, Time-Series\n" +
+        "• **Web & Cloud:** React.js, Node.js, Express, MongoDB, Firebase Cloud, MySQL, REST APIs\n" +
+        "• **Robotics & IoT:** ESP32, RFID Systems, Load Cells, Sensors/Actuators, Telegram Bot API\n" +
+        "• **Tools & Workflow:** Git, GitHub, VS Code, Figma, Anaconda, SPSS, Agile/Scrum";
+    }
+
+    // Blast / Canvas animation
+    if (q.includes('blast') || q.includes('singularity') || q.includes('explosion') || q.includes('canvas') || q.includes('supernova')) {
+      if (this.app && this.app.annBg) {
+        this.app.annBg.triggerNeuralBlast(window.innerWidth / 2, window.innerHeight / 2);
+      }
+      return "💥 Boom! Neural Singularity activated. You can also trigger it anytime by clicking the rotating reel badge on the hero section!";
+    }
+
+    // Who is Sasmitha / About
+    if (q.includes('who') || q.includes('about') || q.includes('sasmitha') || q.includes('bio')) {
+      return "👨‍💻 **Sasmitha Nimesh** is an AI Engineer and Full-Stack Developer with a **First Class Honours BSc (Hons)** in Computer Science (Artificial Intelligence). He develops production-grade Generative AI applications, autonomous robotics, IoT systems, and full-stack cloud software.";
+    }
+
+    // Contact / Hire
+    if (q.includes('contact') || q.includes('hire') || q.includes('email') || q.includes('reach') || q.includes('job') || q.includes('collab')) {
+      return "📬 You can reach Sasmitha directly at [rmsasmithanimesh@gmail.com](mailto:rmsasmithanimesh@gmail.com) or connect on [LinkedIn](https://www.linkedin.com/in/sasmitha-nimesh-rathnayaka/) and [GitHub](https://github.com/SasmithaNimesh).";
+    }
+
+    // Default friendly fallback
+    return "I'm here to help! You can ask me about:\n• Sasmitha's **GitHub Projects** (Gemini AI News, K-Means Clustering, IoT Cart, etc.)\n• His **First Class Honours Degree** & Academic Research in Robotics\n• **Roles & Leadership** (District Coordinator at Sasnaka Sansada)\n• **Software Architecture** or type **'blast'** for the neural supernova!";
+  }
+
+  addUserMessage(text) {
+    if (!this.chatStream) return;
+    this.chatStream.classList.add('active');
+
+    const msg = document.createElement('div');
+    msg.className = 'ted-msg ted-msg-user';
+    msg.textContent = text;
+    this.chatStream.appendChild(msg);
+    this.scrollToBottom();
+  }
+
+  addBotMessage(text) {
+    if (!this.chatStream) return;
+    this.chatStream.classList.add('active');
+
+    const msg = document.createElement('div');
+    msg.className = 'ted-msg ted-msg-bot';
+
+    // Simple markdown conversion: **bold**, *italic*, [link](url), linebreaks
+    let html = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\n/g, '<br />');
+
+    msg.innerHTML = html;
+    this.chatStream.appendChild(msg);
+    this.messages.push({ role: 'bot', text });
+    this.scrollToBottom();
+  }
+
+  showTypingIndicator() {
+    if (!this.chatStream) return;
+    this.chatStream.classList.add('active');
+
+    const ind = document.createElement('div');
+    ind.className = 'ted-msg ted-msg-bot ted-typing-indicator';
+    ind.id = 'ted-typing';
+    ind.innerHTML = `
+      <span class="ted-typing-dot"></span>
+      <span class="ted-typing-dot"></span>
+      <span class="ted-typing-dot"></span>
+    `;
+    this.chatStream.appendChild(ind);
+    this.scrollToBottom();
+  }
+
+  hideTypingIndicator() {
+    const ind = document.getElementById('ted-typing');
+    if (ind) ind.remove();
+  }
+
+  scrollToBottom() {
+    if (this.contentScroll) {
+      this.contentScroll.scrollTop = this.contentScroll.scrollHeight;
+    }
+  }
+
+  resetChat() {
+    if (this.chatStream) {
+      this.chatStream.innerHTML = '';
+      this.chatStream.classList.remove('active');
+    }
+    this.messages = [];
+    this.addBotMessage("🔄 Conversation reset! What would you like to explore next?");
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   window.portfolioApp = new PortfolioApp();
 });
+
 
 

@@ -36,15 +36,22 @@
         <ul class="nav-links">
           <li><a href="#about" class="nav-link link-draw">About</a></li>
           <li><a href="#skills" class="nav-link link-draw">Arsenal</a></li>
+          <li><a href="#experience" class="nav-link link-draw">Roles</a></li>
           <li><a href="#projects" class="nav-link link-draw">Projects</a></li>
           <li><a href="#thoughts" class="nav-link link-draw">Thoughts</a></li>
           <li><a href="assets/resume.pdf" target="_blank" class="nav-resume-btn">Resume</a></li>
-          <li><a href="#contact" class="nav-link link-draw" style="color: var(--accent); font-weight: 700;">Start &gt;
-              Collab</a></li>
+          <li><a href="#contact" class="nav-link link-draw">Contact</a></li>
         </ul>
       </nav>
 
       <div class="nav-actions">
+        <button class="nav-ted-trigger-btn" id="nav-ted-trigger-btn" aria-label="Open Ted AI Assistant"
+          title="Meet Ted! Sasmitha's AI Assistant">
+          <span class="nav-ted-icon">✨</span>
+          <span class="nav-ted-text">Ask Ted AI</span>
+          <span class="nav-ted-beacon"></span>
+        </button>
+
         <a href="#contact" class="nav-contact-btn link-draw">
           Get in Touch &rarr;
         </a>
@@ -60,7 +67,7 @@
   <main>
     <section class="hero-section container" id="about">
       <div class="hero-top">
-        <div class="hero-subtag">AI Engineer &amp; Full-Stack Developer</div>
+        <div class="hero-subtag">BSc (Hons) Computer Science (AI) &bull; First Class Honours</div>
         <div class="perspective-wrap animate-init">
           <h1 class="hero-giant-title perspective-text">SASMITHA NIMESH</h1>
         </div>
@@ -68,8 +75,7 @@
         <div class="hero-meta-grid">
           <div class="hero-lead-col">
             <p class="hero-lead-text">
-              Bridging the gap between advanced machine learning models, intuitive web experiences, and intelligent IoT
-              systems. I turn data into decisions and code into solutions.
+              First Class Honours graduate in Computer Science with Artificial Intelligence. Specializing in autonomous robotics, deep learning architectures, full-stack systems, and real-time IoT hardware. I turn data into decisions and code into production solutions.
             </p>
             <a href="mailto:rmsasmithanimesh@gmail.com" class="hero-email-link link-draw">
               rmsasmithanimesh@gmail.com &rarr;
@@ -77,7 +83,9 @@
           </div>
 
           <div class="hero-badge-wrap">
-            <button class="rotating-reel-btn neural-blast-btn" data-trigger-blast aria-label="Activate Neural Singularity &amp; Math Blast" title="Click to trigger Neural Network &amp; Mathematical Logic Blast!">
+            <button class="rotating-reel-btn neural-blast-btn" data-trigger-blast
+              aria-label="Activate Neural Singularity &amp; Math Blast"
+              title="Click to trigger Neural Network &amp; Mathematical Logic Blast!">
               <img src="assets/reel-badge.svg" alt="Neural Singularity Core Badge" class="badge-svg" />
             </button>
           </div>
@@ -164,16 +172,11 @@
           <div class="editorial-body">
             <strong>Curiosity, analytical rigor, and full-stack execution.</strong>
             <p>
-              My journey started with an obsession with understanding how machines "think and work." As a <strong>BSc
-                (Hons) Computer Science with AI</strong> undergraduate, I actively bridge the divide between training
-              statistical models and shipping clean, responsive, user-facing applications.
+              My journey started with an obsession with understanding how machines perceive, reason, and act. Holding a <strong>BSc (Hons) in Computer Science with Artificial Intelligence (First Class Honours)</strong>, I bridge the divide between training statistical machine learning models and shipping clean, tactile, user-facing applications.
             </p>
             <br />
             <p>
-              I don't just write code; I analyze root problems. Whether it's dissecting multivariate student performance
-              trends with <strong>R</strong>, engineering smart shopping carts with <strong>ESP32 &amp; IoT</strong>, or
-              building automated farming architectures with <strong>Java</strong>, operational efficiency and
-              engineering craft are my primary benchmarks.
+              I don't just write code; I analyze root problems. Whether it's architecting real-time IoT shopping systems with <strong>ESP32 &amp; Firebase</strong>, engineering humanitarian fund allocation algorithms using <strong>unsupervised machine learning (PCA &amp; K-Means)</strong>, or authoring research investigating <strong>AI with automation in robotics</strong>, operational excellence and engineering craft are my primary benchmarks.
             </p>
           </div>
         </div>
@@ -195,18 +198,17 @@
       </div>
 
       <div class="projects-grid">
-        <!-- Project 1: Student Performance Analysis -->
-        <article class="project-card" data-project-id="student-performance" tabindex="0">
+        <!-- Project 1: AI News App (Gemini AI) -->
+        <article class="project-card" data-project-id="ai-news-app" tabindex="0">
           <div class="project-thumb-wrap">
-            <span class="project-tag">AI &amp; Data Science</span>
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
-              alt="Student Performance Analysis" class="project-thumb" loading="lazy" />
+            <span class="project-tag">Generative AI &amp; MERN</span>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+              alt="AI Global News Summarizer" class="project-thumb" loading="lazy" />
           </div>
           <div class="project-card-footer">
             <div>
-              <h3 class="project-card-title">Student Performance Analysis</h3>
-              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">R Language &bull; Statistics
-                &bull; Data Visualization</p>
+              <h3 class="project-card-title">AI Global News Summarizer</h3>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">Google Gemini AI &bull; React &bull; Node.js &bull; MongoDB</p>
             </div>
             <div class="project-arrow-icon">
               <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
@@ -214,7 +216,25 @@
           </div>
         </article>
 
-        <!-- Project 2: Smart Shopping Buddy -->
+        <!-- Project 2: Country Segmentation with K-Means (HELP International) -->
+        <article class="project-card" data-project-id="country-segmentation" tabindex="0">
+          <div class="project-thumb-wrap">
+            <span class="project-tag">Unsupervised ML</span>
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80"
+              alt="Humanitarian Fund Allocation Clustering" class="project-thumb" loading="lazy" />
+          </div>
+          <div class="project-card-footer">
+            <div>
+              <h3 class="project-card-title">Humanitarian Fund Allocation Clustering</h3>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">HELP International &bull; PCA &bull; K-Means &bull; Scikit-Learn</p>
+            </div>
+            <div class="project-arrow-icon">
+              <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Smart Shopping Buddy (ESP32 IoT) -->
         <article class="project-card" data-project-id="smart-shopping-cart" tabindex="0">
           <div class="project-thumb-wrap">
             <span class="project-tag">Robotics &amp; IoT</span>
@@ -223,8 +243,7 @@
           <div class="project-card-footer">
             <div>
               <h3 class="project-card-title">Smart Shopping Buddy</h3>
-              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">ESP32 &bull; RFID &bull;
-                Firebase &bull; Telegram Bot API</p>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">ESP32 &bull; RFID &bull; Load Cell &bull; Firebase &bull; Telegram</p>
             </div>
             <div class="project-arrow-icon">
               <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
@@ -232,7 +251,7 @@
           </div>
         </article>
 
-        <!-- Project 3: AgroVision Farm Management -->
+        <!-- Project 4: AgroVision Farm Management (Java OOP) -->
         <article class="project-card" data-project-id="agrovision" tabindex="0">
           <div class="project-thumb-wrap">
             <span class="project-tag">Smart Agriculture</span>
@@ -242,8 +261,7 @@
           <div class="project-card-footer">
             <div>
               <h3 class="project-card-title">AgroVision Smart Farming</h3>
-              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">Java OOP &bull; Swing GUI
-                &bull; Automated Irrigation</p>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">Java OOP &bull; Swing GUI &bull; Automated Irrigation</p>
             </div>
             <div class="project-arrow-icon">
               <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
@@ -251,18 +269,35 @@
           </div>
         </article>
 
-        <!-- Project 4: Connect Lanka Tourism -->
-        <article class="project-card" data-project-id="connect-lanka" tabindex="0">
+        <!-- Project 5: Sri Lanka Real-Time Food Price Analysis -->
+        <article class="project-card" data-project-id="food-price-analysis" tabindex="0">
           <div class="project-thumb-wrap">
-            <span class="project-tag">Full-Stack Web</span>
-            <img src="assets/ConnectLanka.png" alt="Connect Lanka Tourism Platform" class="project-thumb"
-              loading="lazy" />
+            <span class="project-tag">Data Science &amp; Time-Series</span>
+            <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80"
+              alt="Sri Lanka Food Price Trend Analysis" class="project-thumb" loading="lazy" />
           </div>
           <div class="project-card-footer">
             <div>
-              <h3 class="project-card-title">Connect Lanka Tourism</h3>
-              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">JavaScript &bull; MongoDB
-                &bull; MySQL &bull; Responsive UI</p>
+              <h3 class="project-card-title">Sri Lanka Food Price Trend Analysis</h3>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">Python &bull; Pandas &bull; Time-Series &bull; Economic Modeling</p>
+            </div>
+            <div class="project-arrow-icon">
+              <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Student Performance Analysis in R -->
+        <article class="project-card" data-project-id="student-performance" tabindex="0">
+          <div class="project-thumb-wrap">
+            <span class="project-tag">Statistical Modeling &amp; EDA</span>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+              alt="Student Performance Analysis in R" class="project-thumb" loading="lazy" />
+          </div>
+          <div class="project-card-footer">
+            <div>
+              <h3 class="project-card-title">Student Performance Analysis in R</h3>
+              <p style="color: var(--text-dim); font-size: 0.88rem; margin-top: 0.25rem;">R Language &bull; Statistics &bull; Hypothesis Testing</p>
             </div>
             <div class="project-arrow-icon">
               <img src="assets/arrow-up-right.svg" alt="View" width="18" height="18" />
@@ -370,6 +405,150 @@
             </div>
             <img src="assets/anchor-icon.svg" alt="Robotics & IoT" width="28" height="28" />
           </div>
+
+          <!-- 04: Software & Cloud Architecture -->
+          <div class="service-item">
+            <div class="service-num">04</div>
+            <div class="service-info">
+              <h4>Software &amp; Cloud Architecture</h4>
+              <p>
+                Architecting resilient backends, decoupled service topologies, and modern deployment models:
+              </p>
+              <ul class="arch-bullets">
+                <li><strong>Monolithic Architecture:</strong> Traditional, single-unit applications engineered for
+                  unified domain consistency &amp; optimized performance.</li>
+                <li><strong>Microservices Architecture:</strong> Decoupled services for elastic scalability, isolated
+                  fault domains, and deployment flexibility.</li>
+                <li><strong>Serverless Architecture:</strong> Event-driven, auto-scaling computational routines with
+                  zero infrastructure management overhead.</li>
+                <li><strong>Hybrid Cloud Solutions:</strong> High-performance integration bridging on-premises hardware
+                  telemetry with secure cloud workloads.</li>
+              </ul>
+              <div class="skill-chips">
+                <span class="skill-chip">Monolithic Architecture</span>
+                <span class="skill-chip">Microservices</span>
+                <span class="skill-chip">Serverless</span>
+                <span class="skill-chip">Hybrid Cloud</span>
+                <span class="skill-chip">Docker</span>
+                <span class="skill-chip">REST APIs</span>
+                <span class="skill-chip">System Design</span>
+              </div>
+            </div>
+            <img src="assets/monitor-icon.svg" alt="Software & Cloud Architecture" width="28" height="28" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roles, Academic Distinction & Research Section -->
+    <section class="section-experience container" id="experience">
+      <div class="section-header-row">
+        <div>
+          <div class="section-subtitle">Leadership, Research &amp; Academic Distinction</div>
+          <h2 class="section-title">Roles &amp; Experience</h2>
+        </div>
+        <div>
+          <a href="assets/resume.pdf" target="_blank" class="link-draw">Download Full CV (PDF) &rarr;</a>
+        </div>
+      </div>
+
+      <div class="experience-timeline">
+        <!-- Item 1: Degree First Class Honours -->
+        <div class="experience-card">
+          <div class="exp-period-col">
+            <span class="exp-period-badge badge-distinction">ACADEMIC DISTINCTION</span>
+            <span class="exp-date">BSc (Hons) Computer Science</span>
+          </div>
+          <div class="exp-content-col">
+            <div class="exp-role-header">
+              <h3 class="exp-title">BSc (Hons) in Computer Science with Artificial Intelligence</h3>
+              <span class="exp-org-tag">First Class Honours</span>
+            </div>
+            <p class="exp-desc">
+              Graduated with First Class Honours. Specialized in Robotics, Artificial Intelligence, and Intelligent Autonomous Systems. Deep theoretical rigor across neural network architectures, algorithms, machine learning, and systems engineering paired with tactile engineering execution.
+            </p>
+            <div class="skill-chips">
+              <span class="skill-chip">First Class Honours</span>
+              <span class="skill-chip">Artificial Intelligence</span>
+              <span class="skill-chip">Robotics &amp; Automation</span>
+              <span class="skill-chip">Machine Learning</span>
+              <span class="skill-chip">Python &amp; C++</span>
+              <span class="skill-chip">Algorithms &amp; Data Structures</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Ongoing Research Paper -->
+        <div class="experience-card">
+          <div class="exp-period-col">
+            <span class="exp-period-badge badge-active">ACTIVE RESEARCH</span>
+            <span class="exp-date">Academic Publication</span>
+          </div>
+          <div class="exp-content-col">
+            <div class="exp-role-header">
+              <h3 class="exp-title">Lead Researcher &bull; Impact of AI with Automation in Robotics</h3>
+              <span class="exp-org-tag">Ongoing Research Paper</span>
+            </div>
+            <p class="exp-desc">
+              Investigating the synergistic convergence of Artificial Intelligence models, deep reinforcement learning, and automated control loops in physical robotics systems. Applying the formal Research Onion Methodology to model adaptive automation, real-time sensor processing, and fault tolerance.
+            </p>
+            <div class="skill-chips">
+              <span class="skill-chip">Robotics Automation</span>
+              <span class="skill-chip">Intelligent Control Loops</span>
+              <span class="skill-chip">Research Onion Methodology</span>
+              <span class="skill-chip">Sensor Fusion</span>
+              <span class="skill-chip">Mathematical Modeling</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: District Coordinator - Sasnaka Sansada -->
+        <div class="experience-card">
+          <div class="exp-period-col">
+            <span class="exp-period-badge">LEADERSHIP &amp; IMPACT</span>
+            <span class="exp-date">Sasnaka Sansada</span>
+          </div>
+          <div class="exp-content-col">
+            <div class="exp-role-header">
+              <h3 class="exp-title">District Coordinator &bull; Polonnaruwa District</h3>
+              <span class="exp-org-tag">Sasnaka Sansada Volunteering Organization</span>
+            </div>
+            <p class="exp-desc">
+              Directing regional educational outreach, seminar programs, and youth welfare projects for Sasnaka Sansada in the Polonnaruwa district. Coordinating multi-disciplinary volunteer cohorts to elevate education, public health awareness, and social initiatives.
+            </p>
+            <div class="skill-chips">
+              <span class="skill-chip">District Leadership</span>
+              <span class="skill-chip">Community Outreach</span>
+              <span class="skill-chip">Educational Empowerment</span>
+              <span class="skill-chip">Event &amp; Team Management</span>
+              <span class="skill-chip">Public Health &amp; Welfare</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Open Source Developer -->
+        <div class="experience-card">
+          <div class="exp-period-col">
+            <span class="exp-period-badge">OPEN SOURCE</span>
+            <span class="exp-date">10+ Public Repositories</span>
+          </div>
+          <div class="exp-content-col">
+            <div class="exp-role-header">
+              <h3 class="exp-title">Open Source Applied AI &amp; Full-Stack Software Developer</h3>
+              <span class="exp-org-tag">GitHub Ecosystem</span>
+            </div>
+            <p class="exp-desc">
+              Architecting production-ready open source software ranging from Generative AI headline summarizers (Google Gemini API), IoT retail carts (ESP32 / Firebase), unsupervised machine learning for humanitarian allocation (HELP International), to statistical modeling in R.
+            </p>
+            <div class="skill-chips">
+              <span class="skill-chip">Generative AI</span>
+              <span class="skill-chip">IoT Hardware</span>
+              <span class="skill-chip">Scikit-Learn</span>
+              <span class="skill-chip">MERN Stack</span>
+              <span class="skill-chip">R &amp; Statistics</span>
+              <span class="skill-chip">Clean Architecture</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -413,27 +592,144 @@
   </main>
 
   <!-- Big Editorial Footer / Contact CTA -->
+  <!-- Big Editorial Footer / Contact CTA (Matching Reference Design: Let's Connect) -->
   <footer class="site-footer" id="contact">
     <div class="container">
-      <div class="footer-cta-wrap">
-        <div class="perspective-wrap animate-init">
-          <h2 class="footer-cta-title perspective-text">
-            ALWAYS KEEN<br />
-            FOR EXCITING COLLAB<br />
-            &amp; TECH INNOVATION
-          </h2>
+      <!-- Let's Connect Heading Block -->
+      <div class="connect-header-wrap">
+        <div class="connect-subtag">
+          <span class="connect-subtag-line" aria-hidden="true"></span>
+          <span>LET'S CONNECT</span>
+          <span class="connect-subtag-line" aria-hidden="true"></span>
         </div>
+
+        <h2 class="connect-title">
+          Let's Build Something <span class="gradient-amazing">Amazing</span> Together
+        </h2>
+
+        <p class="connect-subtitle">Find me on these platforms</p>
       </div>
 
-      <div class="footer-email-row">
-        <a href="mailto:rmsasmithanimesh@gmail.com" class="footer-email-btn">
-          <span>rmsasmithanimesh@gmail.com</span>
-          <img src="assets/arrow-up-right.svg" alt="Send email" class="footer-email-arrow" />
+      <!-- 4 Platforms Grid: Horizontal Cards on Desktop, 4 Compact Mini-Cards on Mobile -->
+      <div class="connect-platforms-grid">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/sasmitha-nimesh-rathnayaka/" target="_blank" rel="noopener noreferrer"
+          class="connect-card card-linkedin" aria-label="Connect on LinkedIn">
+          <div class="card-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <span class="card-platform-title">LinkedIn</span>
+            <span class="card-platform-sub">Connect professionally</span>
+          </div>
+          <div class="card-chevron" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
         </a>
 
-        <button class="rotating-reel-btn neural-blast-btn" data-trigger-blast aria-label="Activate Neural Singularity &amp; Math Blast" title="Click to trigger Neural Network &amp; Mathematical Logic Blast!">
-          <img src="assets/reel-badge.svg" alt="Neural Singularity Core Badge" class="badge-svg" />
-        </button>
+        <!-- GitHub -->
+        <a href="https://github.com/SasmithaNimesh" target="_blank" rel="noopener noreferrer"
+          class="connect-card card-github" aria-label="Check out code on GitHub">
+          <div class="card-icon-box">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <span class="card-platform-title">GitHub</span>
+            <span class="card-platform-sub">Check out my code</span>
+          </div>
+          <div class="card-chevron" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/nimesh_s_n/" target="_blank" rel="noopener noreferrer"
+          class="connect-card card-instagram" aria-label="See moments on Instagram">
+          <div class="card-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <span class="card-platform-title">Instagram</span>
+            <span class="card-platform-sub">See my moments</span>
+          </div>
+          <div class="card-chevron" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sasmitha.nimesh.9/" target="_blank" rel="noopener noreferrer"
+          class="connect-card card-facebook" aria-label="Join community on Facebook">
+          <div class="card-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </div>
+          <div class="card-info">
+            <span class="card-platform-title">Facebook</span>
+            <span class="card-platform-sub">Join my community</span>
+          </div>
+          <div class="card-chevron" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- Direct Email Touchpoint & Neural Blast Core Row -->
+      <div class="connect-direct-email-row">
+        <div class="footer-email-action-group">
+          <a href="mailto:rmsasmithanimesh@gmail.com" class="connect-direct-email-btn"
+            title="Send direct email to Sasmitha">
+            <span class="email-icon-box" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </span>
+            <span class="email-text">rmsasmithanimesh@gmail.com</span>
+            <span class="email-pill-arrow">↗</span>
+          </a>
+          <button class="copy-email-btn" id="copy-email-btn" title="Copy email address"
+            aria-label="Copy email address to clipboard">
+            <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+            <span class="copy-tooltip" id="copy-tooltip">Copy</span>
+          </button>
+        </div>
+
+        <div class="connect-reel-btn-wrap">
+          <button class="rotating-reel-btn neural-blast-btn" data-trigger-blast
+            aria-label="Activate Neural Singularity &amp; Math Blast"
+            title="Click to trigger Neural Network &amp; Mathematical Logic Blast!">
+            <img src="assets/reel-badge.svg" alt="Neural Singularity Core Badge" class="badge-svg" />
+          </button>
+        </div>
       </div>
 
       <div class="footer-bottom-grid">
@@ -498,6 +794,173 @@
       <!-- Live project links -->
       <div class="casestudy-links-row" id="modal-links">
         <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI Assistant Launcher FAB (Ted) -->
+  <aside class="ted-widget-launcher" aria-label="Meet Ted AI Assistant">
+    <button class="ted-fab-btn" id="ted-fab-btn" aria-haspopup="dialog" aria-expanded="false"
+      aria-controls="ted-assistant-modal" title="Meet Ted! Sasmitha's AI Assistant">
+      <span class="ted-fab-pulse" aria-hidden="true"></span>
+      <div class="ted-fab-avatar">
+        <img src="assets/ted-assistant.jpg" alt="Ted AI Mascot" />
+        <span class="ted-fab-beacon"></span>
+      </div>
+      <div class="ted-fab-info">
+        <span class="ted-fab-badge">AI ASSISTANT</span>
+        <span class="ted-fab-name">Meet Ted! ↗</span>
+      </div>
+    </button>
+  </aside>
+
+  <!-- Ted AI Assistant Popup Modal (Matching Image 1) -->
+  <div class="ted-modal-backdrop" id="ted-assistant-modal" role="dialog" aria-modal="true"
+    aria-labelledby="ted-modal-title" aria-hidden="true">
+    <div class="ted-device-frame">
+      <!-- Contour Ring Background (Matching Image 1) -->
+      <div class="ted-contour-bg" aria-hidden="true">
+        <div class="contour-ring ring-1"></div>
+        <div class="contour-ring ring-2"></div>
+        <div class="contour-ring ring-3"></div>
+        <div class="contour-ring ring-4"></div>
+      </div>
+
+      <!-- Top Status & Header -->
+      <div class="ted-header-bar">
+        <div class="ted-pill-badge">
+          <span class="ted-pill-tag">AI</span>
+          <span class="ted-pill-text">Your Personal</span>
+          <span class="ted-pill-accent">ASSISTANT</span>
+          <span class="ted-pill-arrow">↗</span>
+        </div>
+        <button class="ted-btn-close" id="ted-close-btn" aria-label="Close Ted AI Assistant">✕</button>
+      </div>
+
+      <!-- Scrollable Content Area -->
+      <div class="ted-content-body" id="ted-content-scroll">
+        <!-- Hero Mascot Section -->
+        <div class="ted-hero-section">
+          <div class="ted-mascot-wrap">
+            <div class="ted-mascot-glow"></div>
+            <img src="assets/ted-assistant.jpg" alt="Ted Robot" class="ted-mascot-img" />
+          </div>
+          <h3 class="ted-headline" id="ted-modal-title">Meet Ted!</h3>
+          <h4 class="ted-subheadline">Your AI Assistant</h4>
+          <p class="ted-question">How can I help you today?</p>
+        </div>
+
+        <!-- Quick Action Cards Grid (Matching Screen 1) -->
+        <div class="ted-cards-grid">
+          <button class="ted-action-card ted-card-primary" data-ted-action="chat">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Start Chat</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">Ask questions about AI, web, and IoT works.</p>
+          </button>
+
+          <button class="ted-action-card" data-ted-action="projects">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Projects</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">Inspect case studies &amp; live demos.</p>
+          </button>
+
+          <button class="ted-action-card" data-ted-action="arch">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Architecture</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">Monolith, Microservices, Serverless.</p>
+          </button>
+
+          <button class="ted-action-card" data-ted-action="resume">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Resume / CV</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">View verified academic &amp; work credentials.</p>
+          </button>
+
+          <button class="ted-action-card" data-ted-action="blast">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Neural Blast</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">Trigger particle singularity explosion.</p>
+          </button>
+
+          <button class="ted-action-card" data-ted-action="contact">
+            <div class="ted-card-top">
+              <span class="ted-card-title">Contact Sasmitha</span>
+              <span class="ted-card-arrow">↗</span>
+            </div>
+            <p class="ted-card-desc">Email, LinkedIn, and collaboration.</p>
+          </button>
+        </div>
+
+        <!-- Ted Intelligence Badges (Matching Screen 1 bottom) -->
+        <div class="ted-features-list">
+          <div class="ted-feature-pill">
+            <span class="ted-feat-icon">🤖</span>
+            <span>Remembers context during conversation</span>
+          </div>
+          <div class="ted-feature-pill">
+            <span class="ted-feat-icon">⚡</span>
+            <span>Directly opens project case studies &amp; canvas blasts</span>
+          </div>
+        </div>
+
+        <!-- Chat Stream (Shown when user chats) -->
+        <div class="ted-chat-stream" id="ted-chat-stream">
+          <!-- Messages will be dynamically rendered here -->
+        </div>
+      </div>
+
+      <!-- Bottom Voice & Input Controller (Matching Screen 3) -->
+      <div class="ted-footer-bar">
+        <!-- Text Input Row (Collapsible / Toggleable) -->
+        <form class="ted-input-form" id="ted-input-form" autocomplete="off">
+          <input type="text" id="ted-text-input" class="ted-text-input" placeholder="Ask Ted anything about Sasmitha..."
+            autocomplete="off" />
+          <button type="submit" class="ted-send-btn" aria-label="Send">➤</button>
+        </form>
+
+        <!-- Bottom Controls Row -->
+        <div class="ted-controls-row">
+          <button class="ted-ctrl-btn" id="ted-toggle-keyboard" title="Toggle Text Chat" aria-label="Toggle text chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+            </svg>
+          </button>
+
+          <!-- Voice Interaction / Mic Button with Concentric Pulse Rings -->
+          <button class="ted-voice-btn" id="ted-voice-btn" title="Click to Speak with Ted"
+            aria-label="Voice conversation with Ted">
+            <span class="voice-ripple ripple-1"></span>
+            <span class="voice-ripple ripple-2"></span>
+            <span class="voice-ripple ripple-3"></span>
+            <span class="voice-mic-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                <line x1="12" y1="19" x2="12" y2="22" />
+              </svg>
+            </span>
+          </button>
+
+          <button class="ted-ctrl-btn" id="ted-reset-chat-btn" title="Reset Conversation"
+            aria-label="Reset conversation">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
